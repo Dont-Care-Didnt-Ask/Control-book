@@ -1,0 +1,319 @@
+\section{Лекция 6}
+
+Мы остановились на липшицевости опорной функции по первому аргументу:
+\begin{equation*}
+    \left| C(F_1, \psi) - C(F_2, \psi) \right| \leqslant \Norm{\psi} \cdot h(F_1, F_2)
+\end{equation*}
+
+Возникает вопрос~--- как искать расстояние Хаусдорфа?
+По определению это делать неудобно.
+
+\begin{thm*}[Свойство 16]
+    Пусть $F_1, F_2 \in \operatorname{conv}\Omega(E^{n})$.
+    Тогда
+    \begin{equation*}
+        h(F_1, F_2) = \max\limits_{\psi \in S} \left| C(F_1, \psi) - C(F_2, \psi) \right|.
+    \end{equation*}
+\end{thm*}
+
+\begin{proof}
+    Обозначим $M = \max\limits_{\psi \in S} |C(F_1, \psi) - C(F_2, \psi)|$.
+    Покажем, что $h(F_1, F_2) \leqslant M$  и одновременно $h(F_1, F_2) \geqslant M$.
+    Пользуясь липшицевостью и тем, что $\forall \psi \in S \; \Norm{\psi} = 1$, получаем:
+    \begin{equation*}
+        \forall \psi \in S \implies |C(F_1, \psi) - C(F_2, \psi)| \leqslant h(F_1, F_2)
+    \end{equation*}
+    Но тогда $h(F_1, F_2) \geqslant M = \max\limits_{\psi \in S} |C(F_1, \psi) - C(F_2, \psi)|$.
+
+    Пусть $\psi \in E^n, \psi \neq 0$.
+    Тогда $\frac{\psi}{\Norm{\psi}} \in S \implies$
+    \begin{equation*}
+        \left| C \left( F_1, \frac{\psi}{\Norm{\psi}} \right)  - C \left( F_2, \frac{\psi}{\Norm{\psi}} \right) \right| \leqslant M
+    \end{equation*}
+    Значит, 
+    \begin{equation*}
+        |C(F_1, \psi) - C(F_2, \psi)| \leqslant M \cdot \Norm{\psi} \quad \forall \psi \in E^n
+    \end{equation*}
+    Раскроем модуль:
+    \begin{equation*}
+        -M \Norm{\psi} \leqslant C(F_1, \psi) - C(F_2, \psi) \leqslant M \cdot \Norm{\psi} \quad \forall \psi \in E^n
+    \end{equation*}
+    Можем записать 
+    \begin{multline*}
+        C(F_1, \psi) \leqslant C(F_2, \psi) + M \Norm{\psi} =\\
+        C(F_2, \psi) + C(S_M(0), \psi) = C(F_2 + S_M(0), \psi) \quad \forall \psi \in E^n \implies \\
+        F_1 \subset F_2 + S_M(0)
+    \end{multline*}
+    Аналогичными рассуждениями получаем $F_2 \subset F_1 + S_M(0)$.
+    Тогда $h(F_1, F_2) \leqslant M$, откуда и вытекает, что
+    \begin{equation*}
+        h(F_1, F_2) = M = \max\limits_{\psi \in S} \left|C(F_1, \psi) - C(F_2, \psi)\right|
+    \end{equation*}
+\end{proof}
+
+\begin{exmp}
+    $F_1 = \Set{(1, 0), (-1, 0)}, F_2 = \Set{(0, 1), (0, -1)}$.
+
+    \begin{center}
+        \begin{tikzpicture}
+            %\coordinate (Origin1) (-5, 0);
+            % Axes
+            \draw [->] (0,-3) -- (0, 4) node [above] {$f_2$};
+            \draw [->] (-5,0) -- (5, 0) node [right] {$f_1$};
+            %\draw [->] ($(Origin1) - (4, 0)$) -- ($(Origin1) + (4, 0)$) node [above] {$f_2$};
+            %\draw [->] ($(Origin1) - (0, 4)$) -- ($(Origin1) + (0, 4)$) node [right] {$f_1$};
+            
+            \fill [orange] (-2, 0) circle [radius = 3pt] node [anchor = north east] {$(-1, 0)$};
+            \fill [orange] (2, 0) circle [radius = 3pt] node [anchor = north west] {$(1, 0)$};
+            \fill [blue] (0, 2) circle [radius = 3pt] node [anchor = south east] {$(0, 1)$};
+            \fill [blue] (0, -2) circle [radius = 3pt] node [anchor = north east] {$(0, -1)$};
+
+            \draw [dashed] (0, 2) circle [radius = sqrt(8)];
+        \end{tikzpicture}
+    \end{center}
+    Понятно, что хаусдорфово расстояние между этими двухточечными множествами равно $\sqrt{2}$.
+    
+    Рассмотрим теперь их выпуклые оболочки:
+    \begin{center}
+        \begin{tikzpicture}
+            %\coordinate (Origin1) (-5, 0);
+            % Axes
+            \draw [->] (0,-3.5) -- (0, 4.5) node [above] {$f_2$};
+            \draw [->] (-5,0) -- (5, 0) node [right] {$f_1$};
+            %\draw [->] ($(Origin1) - (4, 0)$) -- ($(Origin1) + (4, 0)$) node [above] {$f_2$};
+            %\draw [->] ($(Origin1) - (0, 4)$) -- ($(Origin1) + (0, 4)$) node [right] {$f_1$};
+            
+            \fill [orange] (-2, 0) circle [radius = 3pt] node [anchor = north east] {$(-1, 0)$};
+            \fill [orange] (2, 0) circle [radius = 3pt] node [anchor = north west] {$(1, 0)$};
+            \fill [blue] (0, 2) circle [radius = 3pt] node [anchor = south east] {$(0, 1)$};
+            \fill [blue] (0, -2) circle [radius = 3pt] node [anchor = north east] {$(0, -1)$};
+
+            \draw [line width = 0.5mm, draw = blue] (0, -2) -- (0, 2);
+            \draw [line width = 0.5mm, draw = orange] (-2, 0) -- (2, 0);
+
+            \node [orange, anchor = south] at (1, 0) {$\operatorname{conv} F_1$};
+            \node [blue, anchor = east] at (0, -1) {$\operatorname{conv} F_2$};
+
+            %\draw [dashed] (0, 0) circle [radius = 2];
+            
+            % conv F_1 + S_1(0)
+            \node [blue, anchor = west] at ($(0, 2) + (45:2)$) {$\operatorname{conv}F_2 + S_1(0)$};
+            \draw [blue, dashed] (-2, -2) -- (-2, 2);
+            \draw [blue, dashed] (2, -2) -- (2, 2);
+            \draw [blue, dashed] (2, 2) arc (0:180:2);
+            \draw [blue, dashed] (-2, -2) arc (180:360:2);
+
+            % conv F_1 + S_1(0)
+            \node [orange, anchor = east] at ($(-2, 0) + (135:2)$) {$\operatorname{conv}F_1 + S_1(0)$};
+            \draw [orange, dashed] (-2, -2) -- (2, -2);
+            \draw [orange, dashed] (-2, 2) -- (2, 2);
+            \draw [orange, dashed] (2, -2) arc (270:450:2);
+            \draw [orange, dashed] (-2, 2) arc (90:270:2);
+        \end{tikzpicture}
+    \end{center}
+
+    Теперь посчитаем её с помощью доказанного утверждения:
+    \begin{multline*}
+        h(F_1, F_2) = \max\limits_{\psi \in S} |C(F_1, \psi) - C(F_2, \psi)| = 
+        \max\limits_{\psi \in S} \bigl| \max\limits_{f \in F_1} (f, \psi) - \max\limits_{f \in F_2} (f, \psi) \bigr| = \\
+        \max\limits_{\psi \in S} \bigl| \max \Set{\psi_1, -\psi_1} - \max \Set{\psi_2, -\psi_2} \bigr| = 
+        \max\limits_{\psi \in S} \bigl| |\psi_1| - |\psi_2| \bigr| = 1.
+    \end{multline*}
+\end{exmp}
+
+\begin{exmp}
+    Расстояние между шарами $h(S_{r_1}(a_1), S_{r_2}(a_2))$:
+    шары являются выпуклыми компактами, поэтому можно применить свойство 16.
+    \begin{multline*}
+        h(S_{r_1}(a_1), S_{r_2}(a_2)) = \max\limits_{\psi \in S} \bigl|(a_1, \psi) + r_1 \Norm{\psi} + (a_2, \psi) + r_2 \Norm{\psi}\bigr| = \\
+        \max\limits_{\psi \in S} \bigl|(a_1 - a_2, \psi) + (r_1 - r_2)\bigr| = \Norm{a_1 - a_2} + |r_1 - r_2|
+    \end{multline*}
+    Максимум достигается на векторе $\operatorname{sgn}(r_1 - r_2) \cdot \cfrac{a_1 - a_2}{\Norm{a_1 - a_2}}$.
+\end{exmp}
+
+%Теперь, зная опорные функции, мы можем выразить через них модуль множества: $|F| = h(F, \{0\}) = \max\limits_{\psi \in S} C(F, \psi)$.
+Заметим, что модуль множества $|F|$ можно выразить не только как $h(F, \{0\})$, но и как $\max\limits_{\psi \in S} C(F, \psi)$.
+В самом деле, 
+\begin{multline*}
+    \max\limits_{\psi \in S} C(F, \psi) = 
+    \max\limits_{\psi \in S} \max\limits_{f \in F} (f, \psi) = 
+    \max\limits_{f \in F} \max\limits_{\psi \in S} (f, \psi) = 
+    \biggl\{ \psi = \frac{f}{\Norm{f}} \biggr\} = \\
+    \max\limits_{f \in F} \left(f, \frac{f}{\Norm{f}}\right) =
+    \max\limits_{f \in F} \Norm{f} = |F|
+\end{multline*}
+
+\begin{thm*}
+    Пусть функция $f\colon E^n \mapsto E^n$~--- конечная.
+    $f(\psi)$~--- опорная функция некоторого выпуклого компакта $F \iff$ \\
+    выполняются два свойства:
+    \begin{enumerate}
+        \item $f(\lambda \psi) = \lambda f(\psi) \quad \forall \lambda > 0, \psi \in E^n$
+        \item $f(\psi_1 + \psi_2) \leqslant f(\psi_1) + f(\psi_2) \quad \psi_1, \psi_2 \in E^n$
+    \end{enumerate}
+
+    При этом $F = \bigcap\limits_{\psi \in S} \Set{x \in E^n\colon (x, \psi) \leqslant f(\psi)}$.
+\end{thm*}
+
+\subsection*{Многозначные отображения.}
+
+\begin{defn}
+    Функция $F(t)\colon E^1 \mapsto \Omega(E^n)$ называется многозначным отображением.
+\end{defn}
+
+\begin{exmp}
+    %Пусть $F(t): E^1 \mapsto \Omega(E^1)$.
+    %А именно, 
+    $F(t) = S_{|t|}(2t)$.
+\end{exmp}
+
+\begin{exmp}
+    $F(t) = t \cdot \Set{-1, 1}$.
+\end{exmp}
+
+\begin{exmp}
+    $F(t) = \begin{cases}
+        -1, t < 0 \\
+        [-1, 1], t = 0 \\
+        1, t > 0
+    \end{cases}$.
+\end{exmp}
+
+\begin{exmp}
+    $F(t) = \begin{cases}
+        [-1, 1], t \neq 0 \\
+        0, t = 0
+    \end{cases}$.
+\end{exmp}
+
+\begin{defn}
+    Отображение $f\colon E^n \mapsto E^1$ называется \textit{однозначной ветвью}
+    многозначного отображения $F(t)$, если
+    \begin{equation*}
+        \forall t \in E^n \quad f(t) \in F(t)
+    \end{equation*}
+\end{defn}
+
+\begin{exmp}
+    $f = \begin{cases}
+        t, t < 1/2 \\
+        -t, t \geqslant 1/2
+    \end{cases}$~--- однозначная ветвь для $F(t) = t \cdot \Set{-1, 1}$.
+\end{exmp}
+
+\begin{exmp}
+    $f \equiv 0, f = \sin x$~--- однозначные ветви для $F(t) = \begin{cases}
+        -1, t < 0 \\
+        [-1, 1], t = 0 \\
+        1, t > 0
+    \end{cases}$.
+\end{exmp}
+
+Пусть $F(t)\colon E^1 \mapsto \Omega(E^n)$.
+\begin{defn}
+    Многозначное отображение $F(t)$ непрерывно в точке $t_0$, если
+    \begin{align*}
+        \forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0\colon \\
+        |t - t_o| \leqslant \delta \implies h(F(t), F(t_0)) \leqslant \varepsilon
+    \end{align*}
+\end{defn}
+
+\begin{defn}
+    $F(t)$ непрерывна на $T$, если она непрерывна $\forall t \in T$.
+\end{defn}
+
+\begin{thm*}
+    \begin{multline*}
+        F(t) \text{непр. м. о.} \implies \\
+        C(F(t), \psi) \text{непрерывно по } t \text{ равномерно по } \psi \in S \implies \\
+        \operatorname{conv} F(t) \text{ непрерывна.}
+    \end{multline*}
+\end{thm*}
+
+\begin{proof}
+    По свойству 15:
+    \begin{equation*}
+        |C(F(t), \psi) - C(F(t_0), \psi)| \leqslant \Norm{\psi} \cdot h(F(t), F(t_0)) \leqslant h(F(t), F(t_0)) \leqslant \varepsilon \quad \forall t\colon |t - t_0| \leqslant \delta
+    \end{equation*}
+
+
+    Вторая часть:
+    \begin{equation*}
+        h(\operatorname{conv}F(t), \operatorname{conv}F(t_0)) = \max\limits_{\psi \in S}|C(F(t), \psi) - C(F(t_0), \psi)| \leqslant \varepsilon \quad \forall t\colon |t - t_0| \leqslant \delta
+    \end{equation*}
+\end{proof}
+
+\begin{crlr}
+    $F(t)\colon E^1 \mapsto \operatorname{conv}\Omega(E^n)$.
+    Тогда 
+    \begin{multline*}
+        F(t) \text{непр. м. о.} \iff \\
+        C(F(t), \psi) \text{непрерывно по } t \text{ равномерно по } \psi \in S \iff \\
+        \operatorname{conv} F(t) \text{ непрерывна по } t \text{ равномерно по } \psi \in S \iff \\
+        \operatorname{conv} F(t) \text{ непрерывна по } t \text{ по } \forall \text{ фиксированного }\psi \in S
+    \end{multline*}
+\end{crlr}
+
+\begin{proof}
+    \begin{itemize}
+        \item[$\implies$] Очевидно
+        \item[$\impliedby$] От противного:
+        \begin{align}
+            \exists r > 0\; \exists \Set{t_k} \xrightarrow[k \to \infty]{} t_0, \; \psi_k \in S \forall K \in \mathbb{N}\colon \exists k \geqslant K\colon\\
+            |C(F(t_k), \psi_k) - C(F(t_0), \psi_k)| \geqslant r > 0
+        \end{align} 
+
+        Считаем, что $\psi_k$ сходится, так как это последовательность на компакте, и из неё можно выделить сходящуюся подпоследовательность.
+        \begin{align*}
+            |C(F(t_k), \psi_k) - C(F(t_0), \psi_k) + C(F(t_k), \psi_0) - C(F(t_0), \psi_0) + \\
+            C(F(t_0), \psi_0) - C(F(t_0), \psi_k)| \leqslant \\
+            |F(t_k)| \Norm{\psi_k - \psi_0} + |C(F(t_k), \psi_0) - C(F(t_0), \psi_0)|  \\ + 
+            |F(t_0)| \Norm{\psi_k - \psi_0}
+        \end{align*}
+        Всё три слагаемых стремятся к нулю.
+
+        Допустим теперь, что $|F(t_k)| \xrightarrow[k \to \infty]{} +\infty$.
+        Но 
+        \begin{equation*}
+            |F(t_k)| = \max\limits_{\psi \in S} C(F(t_k), \psi) = 
+            C(F(t_k), \phi_k), \quad \phi_k \in S
+        \end{equation*}
+        где $\phi_k$~--- вектора, на которых достигается максимум.
+        $\phi_k \in S \implies \phi_k \to \phi_0 \in S$.
+        (На самом деле, сходится некоторая подпоследовательность, но мы просто переобозначим её за $\phi_k$)
+
+        \begin{align*}
+            C(F(t_k), \phi_k) - C(F(t_0), \phi_0) \leqslant |F(t_0)| \cdot \Norm{\phi_k - \phi_0} \\
+            |F(t_k)| - C(F(t_0), \phi_0) \leqslant |F(t_0)| \cdot \Norm{\phi_k - \phi_0} \\
+            |F(t_k)|\left( 1 - \Norm{\phi_k - \phi_0}  \right) \leqslant C(F(t_0), \phi_0)  
+        \end{align*}
+        То есть $|F(t_k)|$ ограничена, и это противоречит нашему предположению.
+    \end{itemize}
+\end{proof}
+
+\begin{exmp}
+    $C(F(t), \psi) = \begin{cases}
+        -\psi, &\psi < 0 \\
+        |\psi|, &\psi = 0 \\
+        \psi, &\psi > 0
+    \end{cases}$
+\end{exmp}
+
+\begin{exmp}
+    Бывают непрерывные многозначные отображения, у которых нет ни одной непрерывной однозначной ветви.
+
+    $F(t)\colon [0, 1] \mapsto \Omega(E^n)$
+    \begin{equation*}
+        t \in [0, 1]\colon F(t) = \begin{cases}
+            \left(
+            \begin{matrix}
+                \cos(\alpha + \ln t) \\
+                \sin(\alpha + \ln t)
+            \end{matrix}
+            \right), t \leqslant \alpha \leqslant 2\pi
+        \end{cases}
+    \end{equation*}
+
+    Пусть $f(t)$~--- однозначная.
+    Тогда в окрестности нуля она совершает бесконечное число оборотов и не может быть непрерывной.
+\end{exmp}

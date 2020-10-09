@@ -1,0 +1,267 @@
+\section{Лекция 4}
+\subsection{Лемма об отделимости}
+На прошлой лекции мы показали, что
+\begin{equation}
+    H = \operatorname{conv} F = \bigcup\limits_{n = 1}^{\infty} F_n
+\end{equation}
+где $F = F_0 \subset F_1 \subset \ldots \subset F_n \subset \ldots$.
+
+Напомним, как строились эти множества, и заодно перепишем это в немного другой форме:
+\begin{gather*}
+    F_n = \bigcup\limits_{x, y \in F_{n-1}}[x, y] = 
+    \bigcup\limits_{x, y \in F_{n-1}} \bigcup\limits_{\lambda \in [0, 1]} \Set{\lambda x + (1 - \lambda)y} = \\
+    \bigcup\limits_{\lambda \in [0, 1]} \bigcup\limits_{x, y \in F_{n-1}} \Set{\lambda x + (1 - \lambda)y} = \\
+    \bigcup\limits_{\lambda \in [0, 1]} \Set{\lambda F + (1 - \lambda)F}
+\end{gather*}
+
+$\exists s = s(n, F)\colon F_s = F_{s+1} = \ldots = H$.
+Кроме того, $F \in \Omega(E^n) \implies \operatorname{conv}F \in \operatorname{conv}\Omega(E^n)$.
+
+\begin{thm*}[Лемма об отделимости]
+    Пусть $H \in \operatorname{conv}\Omega(E^n), x_0 \notin H$.
+    Тогда 
+    \begin{equation*}
+        \exists \psi \in E^n \setminus \Set{0} \colon (h - x_0, \psi) < 0, \; \forall h \in H.
+    \end{equation*}
+    Или, эквивалентно,
+    \begin{equation*}
+        \exists \psi \in S_1(0)\colon (h - x_0, \psi) < 0, \; \forall h \in H.
+    \end{equation*}
+\end{thm*}
+\begin{proof}
+    Найдём $\min\limits_{h \in H} \Norm{h - x_0} = \Norm{h_0 - x_0} > 0$.
+    Положим $\psi = x_0 - h_0$.
+    Тогда 
+    \begin{equation*}
+        (h - x_0, x_0 - h_0) < 0, \; \forall h \in H.
+    \end{equation*}
+    Или 
+    \begin{equation*}
+        (h - x_0, h_0 - x_0) > 0, \; \forall h \in H.
+    \end{equation*}
+    Действительно, при $h = h_0$
+    \begin{equation*}
+        (h_0 - x_0, h_0 - x_0) = \Norm{h_0 - x_0}^2 > 0, \; \forall h \in H.
+    \end{equation*}
+    Иначе для любого $h \in H$ рассмотрим вектор $h(\lambda) = \lambda h + (1 - \lambda)h_0, \; \lambda \in [0, 1]$.
+    Так как $h_0$ по определению является ближайшим к $x_0$ вектором из $H$, можем сказать, что
+    $ \Norm{h(\lambda) - x_0}^2 \geqslant \Norm{h_0 - x_0}^2 $.
+    Распишем норму как скалярное произведение:
+    \begin{gather*}
+        (\lambda h + (1-\lambda)h_0 - x_0, \lambda h + (1-\lambda)h_0 - x_0) \geqslant \Norm{h_0 - x_0}^2 \\
+        (\lambda (h - h_0) + h_0 - x_0, \lambda (h - h_0) + h_0 - x_0) \geqslant \Norm{h_0 - x_0}^2 \\
+        \lambda^2 \Norm{h- h_0}^2 + 2\lambda(h - h_0, h_0 - x_0) + \Norm{h_0 - x_0}^2 \geqslant \Norm{h_0 - x_0}^2 \\
+        \lambda^2 \Norm{h- h_0}^2 + 2\lambda(h - h_0, h_0 - x_0) \geqslant 0 \\
+    \end{gather*}
+    Для $\lambda \in (0, 1]$:
+    \begin{gather*}
+        \lambda \Norm{h- h_0}^2 + 2(h - h_0, h_0 - x_0) \geqslant 0
+    \end{gather*}
+    Устремим $\lambda$ к нулю:
+    \begin{gather*}
+        \lambda \Norm{h- h_0}^2 + 2(h - h_0, h_0 - x_0) \xrightarrow[\lambda \to 0]{} 2(h - h_0, h_0 - x_0) \geqslant 0, \; \forall h \in H
+    \end{gather*}
+    Значит,
+    \begin{gather*}
+        (h - x_0, h_0 - x_0) = (h - h_0 + h_0 - x_0, h_0 - x_0) = \\
+        (h - h_0, h_0 - x_0) + \Norm{h_0 - x_0}^2 \geqslant 0.
+    \end{gather*}
+    Что и требовалось доказать.
+
+    Для того, чтобы $\psi$ принадлежал единичной сфере, достаточно его нормировать~--- ведь $h_0 \neq x_0 \implies \psi \neq 0$.
+\end{proof}
+
+Можно отказаться от замкнутости, беря замыкание исходного множества.
+Тогда знак неравенства станет нестрогим.
+Можно также отказаться от ограниченности, рассматривая пересечение исходного множества с шаром $S_{\Norm{h - x_0}}(x_0)$.
+В доказательстве мы используем ближайший к $x_0$ элемент $h_0$, а любые элементы, лежащие вне пересечения, будут дальше от $x_0$.
+
+От выпуклости отказаться нельзя.
+
+Если $x_0 \in \partial H$, то $\exists \psi\colon (h - x_0, \psi) \leqslant 0$.
+Действительно,
+\begin{gather*}
+    x_0 \in \partial H \implies \exists \Set{x_k} \notin H\colon x_k \to x_0. \\
+    \forall x_k \; \exists \psi_k \in S_{1}(0)\colon (h - x_0, \psi_k) < 0 \implies \\
+    \exists \psi_0\colon (h - x_0, \psi_0) \leqslant 0 \quad \forall h \in H.
+\end{gather*}
+Это можно ещё записать как
+\begin{equation*}
+    \exists \psi_0\colon \max\limits_{h \in H}(h, \psi_0) \leqslant (x_0, \psi_0).
+\end{equation*}
+
+\subsection{Опорная функция}
+\begin{defn}
+    Пусть $F \in \Omega(E^n), \psi \in E^n$.
+    Опорная функция~---
+    \begin{equation}
+        C(F, \psi) = \max\limits_{f \in F}(f, \psi).
+    \end{equation}
+
+    Если $\exists R > 0\colon F \subset E^n\colon F \subset S_R(0)$, то
+    \begin{equation*}
+        C(F, \psi) = \sup\limits_{f \in F}(f, \psi).
+    \end{equation*}
+\end{defn}
+
+\begin{exmp}
+    Если $F = \Set{f}$, то $C(F, \psi) = (f, \psi)$.
+    Это один из немногих примеров, где опорная функция дифферецируема.
+\end{exmp}
+
+\begin{exmp}
+    Если $F = S_1(0)$, то $C(F, \psi) = \max\limits_{f \in S_1(0)}(f, \psi)$.
+    Если выбрать $\psi \in S_1(0)$, то задача сводится к нахождению максимальной проекции.
+    Значит,
+    \begin{equation*}
+        C(S_1(0), \psi) = \left(\frac{\psi}{\Norm{\psi}}, \psi \right) = \frac{1}{\Norm{\psi}}(\psi, \psi) = \Norm{\psi}.
+    \end{equation*}
+\end{exmp}
+
+\begin{exmp}
+    Если $F = S_1(0) \setminus \partial S_1(0)$, то $C(F, \psi) = \sup\limits_{f \in S_1(0)}(f, \psi) = \Norm{\psi}$.
+\end{exmp}
+
+\begin{exmp}
+    Если $F = \partial S_1(0) = \Set{\psi\colon \Norm{\psi} = 1}$, то вновь $C(F, \psi) = \Norm{\psi}$.
+    Заметим, что норма не является дифференцируемой в нуле.
+\end{exmp}
+
+\begin{exmp}
+    Пусть $F = \Set{f \in E^2\colon |f_1| \leqslant 1, |f_2| \leqslant 1}$~--- квадрат.
+    \begin{gather*}
+        C(F, \psi) = \max\limits_{f \in F}(f, \psi) = \\
+        = \max\limits_{f \in F} (f_1 \psi_1 + f_2 \psi_2) = \\
+        = \max\limits_{|f_1| \leqslant 1} (f_1 \psi_1)  + \max\limits_{|f_2| \leqslant 1} (f_2 \psi_2) = \\
+        = \begin{cases}
+            \psi_1, &\psi_1 > 0 \\
+            0,       &\psi_1 = 0 \\
+            -\psi_1, &\psi_1 < 0 \\
+        \end{cases} + 
+        \begin{cases}
+            \psi_2, & \psi_2 > 0 \\
+            0,      & \psi_2 = 0 \\
+            -\psi_2, & \psi_2 < 0 \\
+        \end{cases} = |\psi_1| + |\psi_2|
+    \end{gather*}
+
+    Соответственно, здесь нет дифференцируемости на осях.
+\end{exmp}
+
+
+\begin{defn}
+    Опорное множество:
+    \begin{equation*}
+        \mathcal{U}(F, \psi) = \Set{f \in F\colon (f, \psi) = C(F, \psi)}
+    \end{equation*}
+\end{defn}
+\begin{defn}
+    Опорная гиперплоскость:
+    \begin{equation*}
+        \Gamma_{\psi} = \Set{f \in E^n\colon (f, \psi) = C(F, \psi)}
+    \end{equation*}
+\end{defn}
+
+\begin{rmrk}
+    $\mathcal{U}(F, \psi) = F \cap \Gamma_{\psi}$.
+\end{rmrk}
+
+\subsubsection{Свойства опорной функции}
+Очевидно, $|C(F, \psi)| = \sup\limits_{f \in F} (f, \psi) \leqslant \sup\limits_{f \in F} \Norm{f} \cdot \Norm{\psi} \leqslant |F| \cdot \Norm{\psi}$.
+\begin{enumerate}
+    \item $F$~--- ограниченное множество, $\psi \in E^n \implies$ \begin{equation*}
+        C(F, \psi) = C(\overline{F}, \psi).
+    \end{equation*}
+    \item Однородность степени 1 по второму аргументу: \begin{equation*}
+        C(F, \lambda \psi) = \lambda C(F, \psi), \quad \forall \lambda > 0
+    \end{equation*}
+    \item Полуаддитивность по второму аргументу: \begin{align*}
+        C(F, \psi_1 + \psi_2) \leqslant C(F, \psi_1) + C(F, \psi_2), \\
+        \forall F \in \Omega(E^n), \forall \psi_1, \psi_2 \in E^n
+    \end{align*}
+    \item Условие Липшица по второму аргументу: \begin{equation*}
+        |C(F, \psi_1) - C(F, \psi_2)| \leqslant |F| \cdot \Norm{\psi_1 - \psi_2}
+    \end{equation*}
+    \begin{rmrk}
+        $C(F, \cdot)\colon E^n \mapsto E^n$ непрерывна по $\psi$.
+    \end{rmrk}
+    \begin{rmrk}
+        $C(F, \cdot)\colon E^n \mapsto E^n$ выпукла:
+        \begin{gather*}
+            C(F, \lambda \psi_1 + (1 - \lambda) \psi_2) \leqslant C(F, \lambda \psi_1) + C(F, (1 - \lambda) \psi_2) = \\
+            \lambda C(F, \psi_1) + (1 - \lambda) C(F, \psi_2).
+        \end{gather*}
+    \end{rmrk}
+    \item Пусть $A \in E^{n \times n}, F \in \Omega(E^n), \psi \in E^n$. 
+    \begin{equation*}
+        C(AF, \psi) = C(F, A^*\psi).
+    \end{equation*}
+    \item Положительная однородность степени 1 по первому аргументу: \begin{equation*}
+        C(\lambda F, \psi) = \lambda C(F, \psi), \quad \lambda > 0.
+    \end{equation*}
+    \item Аддитивность по первому аргументу: \begin{equation*}
+        C(F_1 + F_2, \psi) = C(F_1, \psi) + (F_2, \psi), \quad F_1, F_2 \in \Omega(E^n).
+    \end{equation*}
+    \begin{rmrk}
+        Пусть $\alpha, \beta \geqslant 0, \; F, G \in \Omega(E^n)$.
+        Тогда \begin{equation*}
+            C(\alpha F + \beta G, \psi) = \alpha C(F, \psi) + \beta C(G, \psi).
+        \end{equation*}
+    \end{rmrk}
+\end{enumerate}
+
+\textbf{Доказательства.}
+\begin{enumerate}
+    \item Если максимум в определении опорной функции достигается на предельной точке $f_0$ множества $F, \; f_0 \notin F$, 
+    то существует последовательность $\Set{f_k} \to f_0$, такая что 
+    \begin{equation*}
+        (f_0 - x_0, \psi) - \frac{1}{k} < (f_k - x_0, \psi) \leqslant (f_0 - x_0, \psi).
+    \end{equation*}
+    С одной стороны, $C(F, \psi) \leqslant (f_0 - x_0, \psi)$, так как это максимум.
+    С другой стороны, если $C(F, \psi) = (f_0 - x_0, \psi) - \varepsilon, \; \varepsilon > 0$, то 
+    \begin{equation*}
+        \exists k \in \mathbb{N}\colon \frac{1}{k} < \varepsilon \implies \\ (f_k - x_0, \psi) > (f_0 - x_0, \psi) - \frac{1}{k} > (f_0 - x_0, \psi) - \varepsilon,
+    \end{equation*}
+    что приводит к противоречию.
+    Значит, $C(F, \psi) = C(\overline{F}, \psi)$.
+    \item Воспользуемся тем, что константу можно выносить из скалярного произведения и максимума:
+        \begin{equation*}
+            C(F, \lambda \psi) = \max\limits_{f \in F}(f, \lambda \psi) = 
+            \lambda \max\limits_{f \in F} (f, \psi) = \lambda C(F, \psi)
+        \end{equation*}
+    \item Пользуясь первым свойством, докажем сразу для произвольного ограниченного множества:
+        \begin{gather*}
+            C(F, \psi_1 + \psi_2) = C(\overline{F}, \psi_1 + \psi_2) = \\
+            \max\limits_{f \in \overline{F}}(f, \psi_1 + \psi_2) = \\
+            \max\limits_{f \in \overline{F}} \bigl( (f, \psi_1) + (f, \psi_2) \bigr) \leqslant \\
+            \max\limits_{f \in \overline{F}} (f, \psi_1) + \max\limits_{f \in \overline{F}} (f, \psi_2) = \\
+            C(\overline{F}, \psi_1) + C(\overline{F}, \psi_2) = C(F, \psi_1) + C(F, \psi_2)
+        \end{gather*}
+    \item Воспользуемся свойством 3:
+    \begin{gather*}
+        C(F, \psi_1) = C(F, \psi_1 - \psi_2 + \psi_1) \leqslant C(F, \psi_1 - \psi_2) + C(F, \psi_2) \\
+        C(F, \psi_1) - C(F, \psi_2) \leqslant C(F, \psi_1 - \psi_2) \leqslant |F| \cdot \Norm{\psi_1 - \psi_2}. \\
+        \intertext{В силу симметричности:}
+        C(F, \psi_2) - C(F, \psi_1) \leqslant C(F, \psi_2 - \psi_1) \leqslant |F| \cdot \Norm{\psi_2 - \psi_1} \\
+        \intertext{Или}
+        C(F, \psi_1) - C(F, \psi_2) \geqslant -|F| \cdot \Norm{\psi_2 - \psi_1}. \\
+    \end{gather*}
+    Отсюда и вытекает, что $|C(F, \psi_1) - C(F, \psi_2)| \leqslant |F| \cdot \Norm{\psi_1 - \psi_2}$.
+    \item Воспользуемся определением сопряжённого оператора: 
+    \begin{gather*}
+        C(AF, \psi) = \max\limits_{g \in AF} (g, \psi) = \\
+        \max\limits_{f \in F} (Af, \psi) = \max\limits_{f \in F} (f, A^*\psi) = C(F, A^* \psi).
+    \end{gather*}
+    \item Достаточно заметить, что умножение на скаляр равносильно умножению на скалярную матрицу и использовать свойства 5 и 2:
+    \begin{gather*}
+        C(\lambda F, \psi) = C(\lambda I F, \psi) = C(F, \lambda I^* \psi) = \lambda C(F, \psi).
+    \end{gather*}
+    \item Воспользуемся определением суммы множеств и независимостью $f_1, f_2$:
+    \begin{gather*}
+        C(F_1 + F_2, \psi) = \max\limits_{f \in F_1 + F_2} (f, \psi) = \max\limits_{f_1 \in F_1, f_2 \in F_2} (f_1 + f_2, \psi) = \\
+        \max\limits_{f_1 \in F_1, f_2 \in F_2} \bigl( (f_1, \psi) + (f_2, \psi) \bigr) = \\
+        \max\limits_{f_1 \in F_1} (f_1, \psi) + \max\limits_{f_2 \in F_2}(f_2, \psi) = C(F_1, \psi) + C(F_2, \psi).
+    \end{gather*}
+\end{enumerate}
+
+На следующей лекции мы докажем важный факт: $C(F, \psi) = C(\operatorname{conv}F, \psi)$.

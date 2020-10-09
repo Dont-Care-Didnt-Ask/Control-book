@@ -5,18 +5,27 @@
 \subsubsection{Сложение непустых компактов}
 
 На прошлой лекции мы ввели операцию сложения множеств:
-если $F_{1}, F_{2} \in \Omega(E^{n})$, то $F_{1} + F_{2} = \Set{f \in E^{n}\colon f = f_1 + f_2, f_1 \in F_1, f_2 \in F_2}$,
+если $F_{1}, F_{2} \in \Omega(E^{n})$, то 
+\begin{equation*}
+    F_{1} + F_{2} = \Set{f \in E^{n}\colon f = f_1 + f_2, f_1 \in F_1, f_2 \in F_2}
+\end{equation*}
 где $\Omega(E^{n})$~--- множество непустых компактов в $E^{n}$.
-Также мы доказали, что $\Omega(E^{n})$ замкнуто относительно сложения, то бишь
-$F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
+Также мы доказали, что $\Omega(E^{n})$ замкнуто относительно сложения, то есть
+\begin{equation*}
+    F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n}).
+\end{equation*}
 
-Можно показать, что если $F_{1}, F_{2} \in \operatorname{conv} \Omega(E^{n})$, то $F_{1} + F_{2} \in \operatorname{conv} \Omega(E^{n})$.
+\begin{thm*}
+    Множество непустых выпуклых компактов замкнуто относительно операции сложения, 
+    то есть $F_{1}, F_{2} \in \operatorname{conv} \Omega(E^{n})$, то $F_{1} + F_{2} \in \operatorname{conv} \Omega(E^{n})$.
+\end{thm*}
 \begin{proof}
     Действительно, пусть $x, y \in F_1 + F_2$.
     Тогда 
-    \begin{equation*}
-        x = a_1 + b_1, \; a_1 \in F_1,\; b_1 \in F_2, \quad y = a_2 + b_2,\; a_2 \in F_1,\; b_2 \in F_2
-    \end{equation*}
+    \begin{align*}
+        x = a_1 + b_1, \; a_1 \in F_1,\; b_1 \in F_2 \\
+        y = a_2 + b_2, \; a_2 \in F_1,\; b_2 \in F_2
+    \end{align*}
     Возьмём $\lambda \in [0, 1]$.
     \begin{equation*}
         \lambda x + (1 - \lambda)y = 
@@ -40,7 +49,10 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
 \subsubsection{Умножение множества на число}
 \begin{defn}
     Пусть $\lambda \in E^1$, $F \in \Omega(E^n)$.
-    Тогда $\lambda \cdot F = \Set{\lambda x\SuchThat x \in F}$.
+    Тогда
+    \begin{equation}
+        \lambda \cdot F = \Set{\lambda x\SuchThat x \in F}.
+    \end{equation}
 \end{defn}
 
 Легко проверяются следующие утверждения:
@@ -89,7 +101,8 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
         (\alpha + \beta) \left( \frac{\alpha}{\alpha + \beta} f_1 + \frac{\beta}{\alpha + \beta} f_2\right) =
         (\alpha + \beta)\underbrace{(\lambda f_1 + (1 - \lambda) f_2)}_{\in F} \in (\alpha + \beta) F
         \end{multline*}
-    
+    Заметим, что здесь мы существенно использовали то обстоятельство, что $\alpha, \beta \geqslant 0$.
+    В противном случае $\lambda$ могло выйти за пределы отрезка $[0, 1]$.
 \end{proof}
 
 Геометрически можно интерпретировать множество выпуклых компактов как конус (точнее, множество векторов, принадлежащих конусу) - 
@@ -98,7 +111,10 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
 \subsubsection{Умножение множества на матрицу}
 \begin{defn}
     Пусть $F \in \Omega(E^{n}), A \in E^{n \times n}$.
-    Тогда $A F = \Set{z \in E^n\colon z = Af, f \in F}$.
+    Тогда
+    \begin{equation}
+        A F = \Set{z \in E^n\colon z = Af, f \in F}.
+    \end{equation}
 \end{defn}
 
 Например, если $A = \lambda I$, то $AF = \lambda F$.
@@ -124,6 +140,31 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
     \end{matrix} \right), a \neq 0, b \neq 0, F = S_1(0)$. \\
     Тогда $AF = \Set{f \in E^2 \colon \left( \frac{f_1}{a} \right)^{2} + \left( \frac{f_2}{b} \right)^{2} \leqslant 1}$.\\
     Если $a = 0$, то $AF = \Set{f \in E^2\colon f_1 = 0, |f_2| \leqslant |b|}$~--- отрезок.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \coordinate (Origin) at (0, 0);
+            
+            % Draw ball and ellipse with given color and radius
+            \draw [fill = orange] (Origin) ellipse (20mm and 15mm);
+            \draw [fill = blue] (Origin) circle[radius = 10mm];
+            
+            % Axes
+            \draw [->] (0,-3) -- (0, 4) node [above] {$f_2$};
+            \draw [->] (-5,0) -- (5, 0) node [right] {$f_1$};
+            
+            % Draw last set
+            \draw [line width = 0.5mm, draw = green] (0, -2.5) -- (0, 2.5);
+            
+            % Subscript set names
+            \node [green!70!black, anchor = west] at (0, 2.5) {$F_2 = \left( \begin{matrix} 0 & 0 \\ 0 & 2.5 \end{matrix} \right) F$};
+            \node [orange!70!black, anchor = south east] at (-2, 0) {$F_1 = \left( \begin{matrix} 2 & 0 \\ 0 & 1.5 \end{matrix} \right) F$};
+            \node [blue, anchor = west] at (1.5, -2) {$F = S_{1}(0)$};
+            % Draw a line to last subscript
+            \draw [blue] (300 : 1) -- (1.5, -2);
+
+        \end{tikzpicture}
+    \end{center}
 \end{exmp}
 
 \subsection{Метрика}
@@ -155,6 +196,31 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
     Шар, очевидно, всегда вложен в квадрат: $F_2 \subset F_1 + S_r(0) \; \forall r \geqslant 0$.
     При этом $F_1 \subset F_2 + S_r(0) \; \forall r \geqslant \sqrt{2} - 1$. \\
     Значит, $h(F_1, F_2) = \sqrt{2} - 1$.
+
+    \begin{center}
+        \begin{tikzpicture}
+            % Axes
+            \draw [->] (0,-3) -- (0, 4) node [above] {$f_2$};
+            \draw [->] (-5,0) -- (5, 0) node [right] {$f_1$};
+            
+            % Draw ball and square
+            \draw [fill = orange, draw = orange] (-2, -2) rectangle (2, 2);
+            \draw [fill = blue, draw = blue] (0, 0) circle[radius = 20mm];
+            
+            \draw [dashed] (0,0) circle[radius = sqrt(8)];
+
+            \coordinate (Top) at (0, 2.828);
+            \node [anchor = south west] at (Top) {$\sqrt{2}$};
+
+            % Subscript set names
+            %\node [green!70!black, anchor = west] at (0, 2.5) {$F_2 = \left( \begin{matrix} 0 & 0 \\ 0 & 2.5 \end{matrix} \right) F$};
+            %\node [orange!70!black, anchor = south east] at (-2, 0) {$F_1 = \left( \begin{matrix} 2 & 0 \\ 0 & 1.5 \end{matrix} \right) F$};
+            %\node [blue, anchor = west] at (1.5, -2) {$F = S_{1}(0)$};
+            % Draw a line to last subscript
+            %\draw [blue] (300 : 1) -- (1.5, -2);
+
+        \end{tikzpicture}
+    \end{center}
 \end{exmp}
 
 \begin{exmp}
@@ -211,9 +277,11 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
 Как строить выпуклую оболочку?
 \begin{enumerate}
     \item Подход Каратеодори:
-        $\operatorname{conv} F = \Set{z \in E^n\colon {\sum\limits_{i = 1}^{m}\lambda_i f_i}, {\lambda_i \geqslant 0}, {\sum\limits_{i = 1}^{m}\lambda_i f_i = 1} \; {\forall f_i \in F}}$,
+        \begin{equation*}
+            \operatorname{conv} F = \Set{z \in E^n\colon {\sum\limits_{i = 1}^{m}\lambda_i f_i}, {\lambda_i \geqslant 0}, {\sum\limits_{i = 1}^{m}\lambda_i f_i = 1} \; {\forall f_i \in F}},
+        \end{equation*}
         где $m$ пока прооизвольное.
-        \begin{namedthm}[теорема Каратеодори]
+        \begin{namedthm}[Теорема Каратеодори]
             Для построения выпуклой оболочки описанным выше методом достаточно взять $m = n+1$, где $n = \operatorname{Dim} E^n$.
         \end{namedthm}
     \item Геометрический подход (подход Болтянского):
@@ -258,7 +326,7 @@ $F_{1}, F_{2} \in \Omega(E^{n}) \implies F_{1} + F_{2} \in \Omega(E^{n})$.
 $\exists l = l(n, F) \leqslant n\colon F_0 \subset F_1 \subset \ldots \subset F_l = F_{l+1} = F_{l+2} = \ldots = H$.
 
 Отрезок строится за 1 шаг, треугольник за два шага.
-Рассмотрим 4 точки в пространстве, не лежащие в одной плоскости (тетраэдр).
+Рассмотрим 4 точки в пространстве, не лежащие в одной плоскости (тетраэдр).\\
 $F_0 = \Set{a_0, a_1, a_2, a_3}$~--- вершины. \\
 $F_1 = \Set{[a_0, a_1], [a_0, a_2], [a_0, a_3], [a_1, a_2], [a_1, a_3], [a_2, a_3]}$~--- рёбра. \\
 $F_2 = $ тетраэдр (за счёт соединения противоположных рёбер).
