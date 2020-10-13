@@ -88,16 +88,28 @@
 
 %Оформление определений, теорем, доказательств и т.п.
 \renewcommand{\qedsymbol}{$\blacksquare$}
+
 \renewenvironment{proof}{{\bfseries Доказательство.}}{\qed}
 
+
+%\newtheoremstyle{custom}%    <name>
+%                {\topsep}%   <space above>
+%                {\topsep}%   <space below>
+%                {\itshape}%  <body font>
+%                {}%          <indent amount>
+%                {\bfseries}% <Theorem head font>
+%                {.}%         <punctuation after theorem head>
+%                {\newline}%  <space after theorem head> (default .5em)
+%                {}%          <Theorem head spec>
+\theoremstyle{custom}
 \theoremstyle{definition}
-\newtheorem*{defn}{Определение}
 \newtheorem*{exmp}{Пример}
+\newtheorem*{defn}{Определение}
 \newtheorem*{symb}{Обозначение}
 \newtheorem*{rmrk}{Замечание}
 \newtheorem*{task}{Задача}
 
-\theoremstyle{plain}
+\theoremstyle{custom}
 \newtheorem*{thm*}{Утверждение}
 \newtheorem*{lem}{Лемма}
 \newtheorem*{crlr}{Следствие}
@@ -125,3 +137,4 @@
 \newcommand{\Norm}[1]{\lVert #1 \rVert}
 \newcommand{\SuchThat}{\, \bigl| \,}
 \newcommand{\Set}[1]{\bigl\{ #1 \bigr\}}
+\newcommand{\Dist}[1]{h \bigl(#1\bigr)}

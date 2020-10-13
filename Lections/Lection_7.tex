@@ -1,0 +1,277 @@
+\section{Лекция 7.}
+\subsection{Измеримость многозначных отображений}
+Рассматриваем многозначные отображения $F(t) \colon E^1 \mapsto \Omega(E^n)$.
+
+\begin{defn}
+    Многозначное отображение $F(t)$ \textbf{измеримо}, \\
+    если $\forall \varepsilon > 0$ и $\forall K \in \Omega(E^n)$
+    \begin{equation*}
+        \Set{t\colon \Dist{F(t), K} \leqslant \varepsilon} \text{ измеримо по Лебегу.}
+    \end{equation*}
+\end{defn}
+
+\begin{lem}
+    \begin{multline*}
+        F(t) \text{ измерима } \implies \\
+        C(F(t), \psi) \text{ измерима для любого фиксированного } \psi \implies \\
+        \operatorname{conv}F(t) \text{ измеримо } \forall t. 
+    \end{multline*}
+\end{lem}
+\begin{proof}
+    На лекции не доказано, отсылают к $C$-свойству Лузина.
+\end{proof}
+
+\begin{lem}
+    Рассмотрим функцию $f(\psi), \psi \in E^n \setminus \{0\}$.
+    \begin{equation*}
+        \begin{cases}
+            f(\lambda \psi) = \lambda f(\psi) \quad \forall \lambda > 0 \\
+            f(\psi_1 + \psi_2) = f(\psi_1) + f(\psi_2)
+        \end{cases}
+        \iff \exists P \in \operatorname{conv}\Omega(E^n)\colon C(P, \psi) = f(\psi).
+    \end{equation*}
+\end{lem}
+
+Напомним, что если $F \in \Omega(E^n),$ то 
+\begin{gather*}
+    \Gamma_\psi = \Set{x \in E^n\colon (x, \psi) = C(F, \psi)} \\
+    \mathcal{U}(F, \psi) = \Set{x \in F\colon (x, \psi) = C(F, \psi)} \\
+    \mathcal{U}(F, \psi) = \Gamma_\psi \cap F    
+\end{gather*}
+
+\begin{lem}
+    $\operatorname{conv} \mathcal{U}(F, \psi) = \operatorname{conv} F \cap \Gamma_\psi$.
+\end{lem}
+
+\begin{namedthm}[Теорема Филиппова]
+    Пусть $F(t)\colon E^1 \mapsto \Omega(E^n)$~--- измеримое многозначное отображение.
+
+    Тогда $\exists f(t)\colon E^1 \mapsto E^n$~--- измеримая однозначная ветвь. \\
+    При этом $f(t) \in \mathcal{U}(F(t), \psi_0) \quad \forall t, \forall \psi_0 \neq 0$.
+\end{namedthm}
+\begin{proof}
+    Пусть $\psi \neq 0, F \in \Omega(E^n)$.
+    
+    Найдём производную опорной функции по направлению $\psi$.
+    \begin{equation*}
+        C'(F, \psi_0; \psi) = \lim\limits_{\alpha \to +0} \frac{C(F, \psi_0 + \alpha \psi) - C(F, \psi_0)}{\alpha}
+    \end{equation*}
+
+    Этот предел существует, так как дробь ограчена снизу и монотонно не возрастает по $\alpha$.
+    В самом деле,
+    \begin{multline*}
+        C(F, \psi_0) = C(F, \psi_0 + \alpha \psi - \alpha \psi) \leqslant \\
+        C(F, \psi_0 + \alpha \psi) + C(F, -\alpha \psi) =
+        C(F, \psi_0 + \alpha \psi) + \alpha C(F, -\psi)
+    \end{multline*}
+
+    \begin{multline*}
+        \frac{C(F, \psi_0 + \alpha \psi) - C(F, \psi_0)}{\alpha} \geqslant \\
+        \frac{C(F, \psi_0 + \alpha \psi) - C(F, \psi_0 + \alpha \psi) + \alpha C(F, -\psi)}{\alpha} = C(F, -\psi)
+    \end{multline*}
+    И ограниченность снизу доказана.
+
+    Докажем монотонность. 
+    Пусть теперь $0 < \alpha_2 < \alpha_1, \; \lambda = \frac{\alpha_2}{\alpha_1} \in (0, 1)$.
+    \begin{gather*}
+        x_1 = \psi_0 + \alpha_1 \psi \\
+        x_2 = \psi_0 \\
+        \lambda x_1 + (1 - \lambda) x_2 = 
+        \frac{\alpha_2}{\alpha_1} (\psi_0 + \alpha \psi) + \left(1 - \frac{\alpha_2}{\alpha_1}\right)\psi_0 =
+        \psi_0 + \alpha_2 \psi
+    \end{gather*}
+    Тогда
+    \begin{gather*}
+        C(F, \psi + \alpha_2 \psi) - C(F, \psi_0) \leqslant \alpha_2 \frac{C(F, \psi + \alpha_2 \psi) - C(F, \psi_0)}{\alpha_1} \\
+        \frac{C(F, \psi + \alpha_2 \psi) - C(F, \psi_0)}{\alpha_2} \leqslant \frac{C(F, \psi + \alpha_2 \psi) - C(F, \psi_0)}{\alpha_1}
+   \end{gather*}
+   Т.е. дробь действительно монотонно не возрастает по $\alpha$.
+    
+    Пусть $\lambda > 0$.
+    \begin{multline*}
+        C'(F, \psi_0; \lambda \psi) = \lim\limits_{\alpha \to +0} \frac{C(F, \psi_0 + \alpha \lambda \psi) - C(F, \psi_0)}{\alpha} = \\
+        \lim\limits_{\alpha \to +0} \lambda \frac{C(F, \psi_0 + \alpha \lambda \psi) - C(F, \psi_0)}{\lambda \alpha} = \\
+        \lambda \lim\limits_{\beta \to +0} \frac{C(F, \psi_0 + \beta \psi) - C(F, \psi_0)}{\beta} = \lambda C'(F, \psi_0; \psi)
+    \end{multline*}
+
+    \begin{multline*}
+        C'(F, \psi_0; \psi_1 + \psi_2) = \lim\limits_{\alpha \to +0} \frac{C(F, \psi_0 + \alpha(\psi_1 + \psi_2)) - C(F, \psi_0)}{\alpha} = \\
+        \lim\limits_{\alpha/2 \to +0} \frac{C(F, \psi_0 + \frac{\alpha}{2}(\psi_1 + \psi_2)) - C(F, \psi_0)}{\frac{\alpha}{2}} = \\
+        \lim\limits_{\alpha/2 \to +0} \frac{C(F, \frac{\psi_0 + \alpha \psi_1 + \psi_0 + \alpha \psi_2}{2}) - C(F, \psi_0)}{\frac{\alpha}{2}} = \\
+        \lim\limits_{\alpha/2 \to +0} \frac{\frac{1}{2} ( C(F, \psi_0 + \alpha \psi_1 + \psi_0 + \alpha \psi_2) - 2C(F, \psi_0))}{\frac{\alpha}{2}} \leqslant \\
+        \lim\limits_{\alpha \to +0} \frac{ C(F, \psi_0 + \alpha \psi_1) - C(F, \psi_0) +  C(\psi_0 + \alpha \psi_2) - C(F, \psi_0)}{\alpha} = \\
+        \lim\limits_{\alpha \to +0} \frac{ C(F, \psi_0 + \alpha \psi_1) - C(F, \psi_0)}{\alpha} + \lim\limits_{\alpha \to +0} \frac{C(\psi_0 + \alpha \psi_2) - C(F, \psi_0)}{\alpha}= \\
+        C'(F, \psi_0; \psi_1) + C'(F, \psi_0; \psi_2).
+    \end{multline*}
+    Таким образом, производная опорной функции обладает свойствами 1 и 2 из леммы 2, 
+    но тогда существует такой выпуклый компакт $P$, что опорная функция к нему есть наша фунция.
+
+    Докажем, что $P = \operatorname{conv}\mathcal{U}(F, \psi_0) = \operatorname{conv} F \cap \Gamma_{\psi_0}$.
+    Достаточно показать двустороннее вложение. 
+    Покажем, что $\operatorname{conv}\mathcal{U}(F, \psi_0) \subset P$.
+
+    $\forall x \in \operatorname{conv}\mathcal{U}(F, \psi_0) = \operatorname{conv} F \cap \Gamma_{\psi_0}, $ то есть:
+    \begin{gather*}
+        (x, \psi_0) = C(F, \psi_0) \\
+        (x, \psi) \leqslant C(F, \psi)
+    \end{gather*}
+    
+    \textit{Мы пишем $C(F, \psi)$, так как $C(\operatorname{conv}F, \psi) = C(F, \psi)$}.
+    
+    Рассмотрим $(x, \psi)$.
+    \begin{gather*}
+        (x, \psi) = \frac{(x, \lambda \psi)}{\lambda} = 
+        \frac{(x, \psi_0 - \psi_0 + \lambda \psi)}{\lambda} = \\
+        \frac{(x, \psi_0 + \lambda \psi) - (x, \psi_0)}{\lambda} \leqslant 
+        \frac{C(F, \psi_0 + \lambda \psi) - C(F, \psi_0)}{\lambda}
+    \end{gather*}
+    Перейдём к пределу $\lambda \to +0 \implies (x, \psi) \leqslant C'(F, \psi_0; \psi) = C(P, \psi) \implies x \in P$.
+
+    \bigskip
+    Докажем обратное вложение, используя, что $\operatorname{conv}\mathcal{U}(F, \psi) = \operatorname{conv}F \cap \Gamma_\psi$.
+    Покажем, что $x \in P \implies x \in \Gamma_\psi$.
+
+    $\forall x \in P, \; \forall \psi \in E^n \quad (x, \psi) \leqslant C'(F, \psi_0; \psi)$.
+    Подставим $\psi = \psi_0$.
+    \begin{gather*}
+        (x, \psi_0) \leqslant C'(F, \psi_0; \psi_0) = \\
+        \lim\limits_{\alpha \to 0} \frac{C(F, \psi_0 + \alpha \psi_0) - C(F, \psi_0)}{\alpha} = 
+        \lim\limits_{\alpha \to 0} (1 + \alpha)\frac{C(F, \psi_0) - C(F, \psi_0)}{\alpha} = C(F, \psi_0)
+    \end{gather*}
+
+    \begin{gather*}
+        (x, -\psi_0) \leqslant C'(F, \psi_0; -\psi_0) = \\
+        \lim\limits_{\alpha \to 0} \frac{C(F, \psi_0 - \alpha \psi_0) - C(F, \psi_0)}{\alpha} = 
+        \lim\limits_{\alpha \to 0} (1 - \alpha)\frac{C(F, \psi_0) - C(F, \psi_0)}{\alpha} = -C(F, \psi_0)
+    \end{gather*}
+    $(x, -\psi_0) \leqslant -C(F, \psi_0) \implies (x, \psi_0) \geqslant C(F, \psi_0) $.
+
+    \begin{equation*}
+        \begin{cases}
+            (x, \psi_0) \leqslant C(F, \psi_0) \\
+            (x, \psi_0) \geqslant C(F, \psi_0)
+        \end{cases} \implies (x, \psi_0) = C(F, \psi_0) \implies x \in \Gamma_{\psi_0}.
+    \end{equation*}
+
+    Осталось показать, что $x \in P \implies x \in \operatorname{conv}F$.
+    \begin{gather*}
+        (x, \psi) \leqslant C'(F, \psi_0; \psi) = 
+        \lim\limits_{\alpha \to +0} \frac{C(F, \psi_0 + \alpha \psi) - C(F, \psi_0)}{\alpha} \leqslant \\
+        \lim\limits_{\alpha \to +0} \frac{C(F, \psi_0) + \alpha C(F, \psi) - C(F, \psi_0)}{\alpha} =
+        C(F, \psi)
+    \end{gather*}
+    Тогда
+    \begin{equation*}
+        x \in P \implies \begin{cases}
+            x \in \Gamma_\psi \\
+            x \in \operatorname{conv} F
+        \end{cases} \implies x \in \mathcal{U}(F, \psi).
+    \end{equation*}
+    Значит, $P = \mathcal{U}(F, \psi)$.
+
+    \bigskip
+    Вспомним, что же мы доказывали.
+    $F(t)\colon E^1 \mapsto \Omega(E^n)$ измерима $\implies \exists f(t)\colon$
+    \begin{enumerate}
+        \item $f(t) \in F(t) \quad \forall t$;
+        \item $f(t)$ измерима;
+        \item $f(t) \in \mathcal{U}(F(t), \psi_0) \quad \forall \psi_0 \neq 0$.
+    \end{enumerate}
+
+    Рассмотрим в пространстве $E^n$ базис $e_1 = \psi_0, e_2, \ldots, e_n$. Положим
+    \begin{gather*}
+        \mathcal{U}_0(t) = F(t) \\
+        \mathcal{U}_1(t) = \mathcal{U}(F(t), \psi_0) = \mathcal{U}(\mathcal{U}_0(t), e_1) \\
+        \mathcal{U}_i(t) = \mathcal{U}(\mathcal{U}_{i-1}, e_i)
+    \end{gather*}
+
+    $\mathcal{U}_n(t) \subset \mathcal{U}_{n-1}(t) \subset \ldots \subset \mathcal{U}_1(t) \subset F(t)$.
+    
+    \begin{gather*}
+        \mathcal{U}_i \subset \Gamma_{e_1} \equiv \Gamma_{\psi_0} \implies
+        \operatorname{dim} \mathcal{U}_1(t) \leqslant \operatorname{dim} \Gamma_{e_1} = n - 1. \\
+        \mathcal{U}_i \subset \Gamma_{e_2} \cap \Gamma_{e_1} \implies
+        \operatorname{dim} \mathcal{U}_1(t) \leqslant \operatorname{dim} \Gamma_{e_1} \cap \Gamma_{e_2} = n - 2. \\
+        \ldots \\
+        \operatorname{dim} \mathcal{U}_n(t) = 0
+    \end{gather*}
+    Значит, $\mathcal{U}_n(t) = \Set{f(t)}$.
+    %При этом $\mathcal{U}_n(t) \subset \mathcal{U}_1(t) = \mathcal{U}(F(t), \psi_0),$ т.е. $f(t) \in \mathcal{U}(F(t), \psi_0) \forall t, \forall \psi_0$.
+    При этом по построению $f(t) \in \mathcal{U}_i(t) = \mathcal{U}(\mathcal{U}_{i-1}, e_i) \subset \mathcal{U}(F(t), e_i)$.
+    Значит, $f(t) \in \mathcal{U}(F(t), e_i)$ для всех базисных векторов, а значит, и для $\forall \psi_0 \neq 0$.
+\end{proof}
+
+\subsection{Интеграл от многозначного отображения}
+
+\begin{defn}
+    Пусть $F(t)\colon [t_0, t_1] \mapsto \Omega(E^n)$.
+
+    \begin{equation*}
+        \int\limits_{t_0}^{t_1} F(t) dt = \Set{x \in E^n\colon x = \int\limits_{t_0}^{t_1} f(t) dt, \text{ где } f(t)\text{~--- однозначная ветвь } F(t)}.
+    \end{equation*}
+\end{defn}
+
+\begin{namedthm}[Теорема Ляпунова]
+    Пусть $F(t)\colon [t_0, t_1] \mapsto \Omega(E^n)$~--- измеримое отображение и 
+    $|F(t)| \leqslant K(t)$, где $K(t)$~--- интегрируемая по Лебегу на $[t_0, t_1]$.
+
+    Тогда
+    \begin{equation*}
+        \int\limits_{t_0}^{t_1} F(t) dt \in \operatorname{conv} \Omega(E^n).
+    \end{equation*}
+\end{namedthm}
+\begin{proof}
+    Обозначим $G = \int\limits_{t_0}^{t_1} F(t) dt$.
+    Надо доказать, что
+    \begin{enumerate}
+        \item $G$ непусто
+        \item $G$ ограниченно 
+        \item $G$ замкнуто
+        \item $G$ выпукло
+    \end{enumerate}
+
+    По теореме Филиппова в силу измеримости $F(t)$ существует измеримая ветвь $f(t)$, причём 
+    \begin{equation*}
+        f(t) \leqslant |F(t)| \leqslant K(t)
+    \end{equation*}
+    Тогда существует $\int\limits_{t_0}^{t_1} f(t)\, dt \in G$.
+
+    \begin{gather*}
+        \forall g \in G \; g = \int\limits_{t_0}^{t_1} f(t)\, dt \\
+        \Norm{g} \leqslant 
+        \AdjNorm{\int\limits_{t_0}^{t_1} f(t)\, dt} \leqslant
+        \int\limits_{t_0}^{t_1} \Norm{f(t)}\, dt \leqslant
+        \int\limits_{t_0}^{t_1} |F(t)| \, dt \leqslant
+        \int\limits_{t_0}^{t_1} |K(t)| \, dt = K
+    \end{gather*}
+
+    3, 4~--- без доказательства. (Можно посмотреть в книге Благодатского "<Введение в ОУ">).
+\end{proof}
+
+\begin{exmp}
+    $F(t) = t \cdot \Set{-1, 1},  t \in [0, 1]$.
+
+    \begin{equation*}
+        G = \int\limits_{0}^{1} F(t) \, dt
+    \end{equation*}
+    Можно рассмотреть непрерывные ветви:
+    \begin{gather*}
+        g_1 = \int\limits_{0}^{1} t \, dt = \frac{1}{2} \\
+        g_2 = \int\limits_{0}^{1} -t \, dt = -\frac{1}{2}
+    \end{gather*}
+    Тогда по теореме Ляпунова $G = [-\frac{1}{2}, \frac{1}{2}]$.
+
+    В самом деле, если рассматривать не только непрерывные ветви:
+    \begin{equation*}
+        f_{\alpha}(t) = \begin{cases}
+            t, & t \in [0, \alpha], \\
+            -t, & t \in (\alpha, 1)
+        \end{cases}
+    \end{equation*}
+    где $\alpha \in [0, 1]$, то можно увидеть, что
+    \begin{multline*}
+        g_\alpha = \int\limits_0^1 f_\alpha(t) dt = \int\limits_0^\alpha t \, dt + \int\limits_\alpha^1 -t \, dt = 
+        \frac{\alpha^2}{2} - \frac{1}{2} + \frac{\alpha^2}{2} = \alpha^2 - \frac{1}{2} \in \left[-\frac{1}{2}, \frac{1}{2}\right]
+    \end{multline*}
+    То есть $\forall x \in \left[-\frac{1}{2}, \frac{1}{2}\right] \; \exists \alpha(x) = \sqrt{x + \frac{1}{2}}\colon g_\alpha = x \implies x \in G$.
+\end{exmp}
