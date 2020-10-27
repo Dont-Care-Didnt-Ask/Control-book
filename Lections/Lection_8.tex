@@ -1,0 +1,358 @@
+\section{Лекция 8.}
+
+На прошлой лекции была сформулирована теорема Ляпунова:
+если $F(t)\colon [t_0, t_1] \mapsto \Omega(E^n)$~--- измеримое отображение и 
+$|F(t)| \leqslant K(t)$, где $K(t)$~--- интегрируемая по Лебегу на $[t_0, t_1]$, то
+\begin{equation*}
+    \int\limits_{t_0}^{t_1} F(t) dt \in \operatorname{conv} \Omega(E^n).
+\end{equation*}
+Она позволяет гораздо легче искать интегралы многозначных отображений.
+
+\begin{lem}[О внесении знака опорной функции под знак интеграла]
+    Пусть $F(t)\colon [t_0, t_1] \mapsto \Omega(E^n)$~--- измеримое отображение и
+    $|F(t)| \leqslant K(t)$, где $K(t)$~--- интегрируемая по Лебегу на $[t_0, t_1]$.
+
+    Тогда
+    \begin{equation*}
+        C\left( \int\limits_{t_0}^{t_1} F(t) \, dt, \psi \right) = 
+        \int\limits_{t_0}^{t_1} C(F(t), \psi) \, dt 
+    \end{equation*}
+\end{lem}
+\begin{proof}
+    \begin{equation*}
+        G = \int\limits_{t_0}^{t_1} F(t) \in \operatorname{conv}\Omega(E^n)
+    \end{equation*}
+    $C(G, \psi)$~--- опорная функция.
+    \begin{equation*}
+        |C(F(t), \psi) | \leqslant F(t) \Norm{\psi} \leqslant K(t) \Norm{\psi} \implies \exists \int\limits_{t_0}^{t_1} C(F(t), \psi) \, dt 
+    \end{equation*}
+
+    \begin{gather*}
+        \forall g \in G \implies \exists f(t) \in F(t)\colon |f(t)| \leqslant C(F(t), \psi)\\
+        g = \int\limits_{t_0}^{t_1} f(t)\, dt \\
+        (g, \psi) = \left( \int\limits_{t_0}^{t_1} f(t)\, dt, \psi \right) \leqslant \\
+        \int\limits_{t_0}^{t_1} (f(t), \psi) \, dt
+    \end{gather*}
+    Так как $g$~--- любое,
+    \begin{gather*}
+        \int\limits_{t_0}^{t_1} (f(t), \psi) \, dt \leqslant
+        \int\limits_{t_0}^{t_1} \max\limits_{f(t) \in F(t)}(f(t), \psi) \, dt = 
+        \int\limits_{t_0}^{t_1} C(F(t), \psi) \, dt.
+    \end{gather*}
+
+    Покажем обратное. По теореме Филиппова:
+    \begin{gather*}
+        f(t) \in \mathcal{U}(F(t), \psi) \implies \\
+        (f(t), \psi) = C(F(t), \psi), \\
+        \int\limits_{t_0}^{t_1} C(F(t), \psi) \, dt = 
+        \int\limits_{t_0}^{t_1} (f(t), \psi) \, dt = \\ 
+        \left( \int\limits_{t_0}^{t_1} f(t) \, dt, \psi \right) =
+        (g, \psi) \leqslant C(G, \psi)
+    \end{gather*}
+
+    Таким образом, 
+    \begin{equation*}
+        C\left( \int\limits_{t_0}^{t_1} F(t) \, dt, \psi \right) = 
+        \int\limits_{t_0}^{t_1} C(F(t), \psi) \, dt 
+    \end{equation*}
+\end{proof}
+
+\begin{exmp}
+    $F(t)\colon [t_0, t_1] \mapsto \Omega(E^1)$.
+
+    $F(t) = t \cdot \{-1, 1\}$.
+    \begin{equation*}
+        G = \int\limits_{0}^{1} F(t) \, dt
+    \end{equation*}
+    \begin{gather*}
+        C(G, \psi) =
+        C\left( \int\limits_{0}^{1} t\cdot\{-1, 1\} \, dt, \psi \right) = \\
+        \int\limits_{0}^{1} C(t \cdot \{-1, 1\}, \psi) \, dt = 
+        \int\limits_{0}^{1} t \cdot |\psi| = \frac{1}{2} \psi = C(S_1(0), \psi)
+    \end{gather*}
+    $G = S_{1/2}(0) = [-1/2, 1/2]$.
+\end{exmp}
+
+\begin{exmp}
+    $F(t)\colon [-\pi, \pi] \mapsto \Omega(E^2)$.
+
+    $F(t) = A(t) \cdot \{-U, U\}$.
+
+    \begin{gather*}
+        A(t) = \left( \begin{matrix}
+            \sin t & t^2 \\
+            \cos t & t^3
+        \end{matrix} \right), \;
+        U = \left( \begin{matrix}
+            1 \\
+            0
+        \end{matrix} \right)
+    \end{gather*}
+
+    \begin{equation*}
+        G = \int\limits_{-\pi}^{\pi} A(t)\Set{-U, U} \, dt
+    \end{equation*}
+    \begin{gather*}
+        C(G, \psi) =
+        C\left( \int\limits_{-\pi}^{\pi} A(t) \cdot \Set{-U, U} \, dt, \psi \right) = \\
+        \int\limits_{-\pi}^{\pi} C(A(t) \cdot \Set{-U, U}, \psi) \, dt = 
+        \int\limits_{-\pi}^{\pi} C(\Set{-U, U}, A^{*}(t)\psi) \, dt = \\
+        \int\limits_{-\pi}^{\pi} |(U,  A^{*}(t)\psi) | \, dt =
+        \int\limits_{-\pi}^{\pi} |(A(t) U, \psi)| \, dt.
+    \end{gather*}
+
+    \begin{gather*}
+        C(G, \psi) = \int\limits_{\pi}^{\pi} \left| \left( \begin{matrix}
+            \sin t \\
+            \cos t
+        \end{matrix} \right), (\psi_1, \psi_2) \right| dt = 
+        \int\limits_{-\pi}^{\pi} \Norm{\psi} |\psi_1 \sin t + \psi_2 \cos t| \, dt = \\
+        - \Norm{\psi} \int\limits_{-\pi}^{\pi} |\cos \alpha \sin t + \sin \alpha \cos t| dt = 
+        \Norm{\psi} \int\limits_{-\pi}^{\pi} |\sin (t + \alpha)| dt =
+        4 \Norm{\psi} = 
+        C(S_1(0), \psi)
+    \end{gather*}
+
+    $G = S_{4}(0)$.
+\end{exmp}
+
+Пусть $F(t) \equiv F \in \Omega(E^{n})$.
+Верно ли следующее утверждение?
+\begin{equation*}
+    G = \int\limits_{t_0}^{t_1} F(t) dt = \int\limits_{t_0}^{t_1} F dt = F (t_1 - t_0) \quad (?)\\
+\end{equation*}
+Посчитаем интеграл при помощи опорной функции:
+\begin{gather*}
+    C(G, \psi) = \int\limits_{t_0}^{t_1} C(F, \psi) \, dt = (t_1 - t_0) C(F, \psi) = \\
+    C((t_1 - t_0)F, \psi) \implies \\
+    G = (t_1 - t_0) \operatorname{conv} F
+\end{gather*}
+То есть, для выпуклых компактов $F$ верно
+\begin{equation*}
+    \int\limits_{t_0}^{t_1} F \, dt = 
+    (t_1 - t_0) F.
+\end{equation*}
+
+\begin{thm*}
+    Пусть $F(t)\colon [t_0, t_1] \mapsto \Omega(E^n)$~--- измеримое отображение и
+    $|F(t)| \leqslant K(t)$, где $K(t)$~--- интегрируемая по Лебегу на $[t_0, t_1]$.
+
+    Рассмотрим 
+    \begin{equation*}
+        G(\tau) = \int\limits_{t_0}^{\tau} F(t) \, dt, \quad \tau \in [t_0, t_1]
+    \end{equation*}
+    $G\colon [t_0, t_1] \mapsto \operatorname{conv}\Omega(E^{n})$.
+
+    Тогда $G(\tau)$~--- непрерывное многозначное отображение.
+\end{thm*}
+\begin{proof}
+    \begin{gather*}
+        C(G(\tau), \psi) = 
+        \int\limits_{t_0}^{\tau} C(F(t), \psi) \, dt. 
+    \end{gather*}
+    $C(G(t), \psi)$ непрерывна по $\tau$ для любого фиксированного $\psi_0 \in E^n \implies G(\tau)$ непрерывна.
+\end{proof}
+
+\subsection{Формула Коши}
+
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) = x_0
+    \end{cases}
+\end{equation*}
+
+Рассмотрим случай, когда размерность $n = 1, u(t)$ непрерывна.
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = ax + u(t) \\
+        x(t_0) = x_0
+    \end{cases}
+\end{equation*}
+
+Решение этой задачи можно найти по \textit{формуле Коши}:
+\begin{gather*}
+    x(t) = e^{a(t - t_0)} \left( x_0 + \int\limits_{t_0}^{t} e^{-(s - t_0)a} u(s) \, ds\right) = \\
+    e^{a(t - t_0)} x_0 + \int\limits_{t_0}^{t} e^{(t - s)a} u(s) \, ds.
+\end{gather*}
+
+Если $u(t)$ измерима, то не получится ограничиться интегралом Римана и обычными теоремами существования и единственности.
+Тогда ищем $x(t)$~--- абсолютно непрерывную на $[t_0, t_1]$, т.е. почти всюду дифференцируемую на $[t_0, t_1]$, такую что
+$\dot{x}(t)$ интегрируема по Лебегу на $[t_0, t_1]$ и 
+\begin{equation*}
+    x(t) = x(t_0) + \int\limits_{t_0}^{t} \dot{x}(s) \, ds.
+\end{equation*}
+
+Что делать при $n > 1$?
+
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) = x_0
+    \end{cases}
+\end{equation*}
+
+Оказывается, решение выражается той же формулой:
+\begin{gather*}
+    x(t) = e^{A(t - t_0)} \left( x_0 + \int\limits_{t_0}^{t} e^{-(s - t_0)A} u(s) \, ds\right) = \\
+    e^{A(t - t_0)} x_0 + \int\limits_{t_0}^{t} e^{(t - s)A} u(s) \, ds.
+\end{gather*}
+
+Но что такое $e^{A}$?
+
+\subsection{Экпоненциал матрицы}
+
+В одномерном случае верно разложение в ряд Маклорена:
+\begin{equation*}
+    e^x = 1 + x + \frac{x^2}{2} + \ldots + \frac{x^k}{k!} + \ldots 
+\end{equation*}
+
+Пусть теперь $D \in \mathbb{R}^{n \times n}$~--- постоянная матрица.
+
+\begin{defn}
+    \textit{Экспоненциалом матрицы} $D$ называется матрица вида
+    \begin{equation*}
+        e^{D} = I + D + \frac{D^2}{2} + \ldots + \frac{D^k}{k!} + \ldots
+    \end{equation*}
+
+    Соответственно, 
+    \begin{equation*}
+        e^{tD} = I + tD + \frac{t^2}{2} D^2 + \ldots + \frac{t^k}{k!} D^k + \ldots 
+    \end{equation*}
+\end{defn}
+
+\begin{namedthm}[Об основных свойствах экспоненциала матрицы]
+    \begin{enumerate}
+        \item[]
+        \item Для $\forall D \in \mathbb{R}^{n \times n}$ существует $ e^{D}$, а последовательность $\frac{(D)^k_{ij}}{k!}$ образует абсолютно сходящийся ряд $\forall i, j = \overline{1, n}$.
+        \item Если $AB = BA$, то $e^{AB} = e^{A} e^{B}$.
+        \item $e^D$~--- невырожденная матрица.
+        \item $e^{tA}$ непрерывно дифференцируема по $t$ на $(-\infty, +\infty)$ и 
+        \begin{equation*}
+            \frac{d}{dt} e^{tA} = A \cdot e^{tA} = e^{tA} \cdot A
+        \end{equation*}
+    \end{enumerate}
+\end{namedthm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Пусть $d = \max\limits_{1 \leqslant i, j \leqslant n} |d_{ij}|$.
+            \begin{align*}
+                |D_{ij}| &\leqslant d \\
+                |D^2_{ij}| &\leqslant nd^2 \\
+                &\vdots \\
+                |D^k_{ij}| &\leqslant n^{k-1} d^k 
+            \end{align*}
+        
+            Тогда 
+            \begin{gather*}
+                \left| \biggl( D + \frac{D^2}{2} + \ldots + \frac{D^k}{k!} + \ldots \biggr)_{ij} \right| \leqslant \\
+                d + \frac{nd^2}{2!} + \frac{n^2 d^3}{3!} + \ldots = \frac{e^{nd} - 1}{n} \quad \forall i, j = \overline{1, n}.
+            \end{gather*}
+            Таким образом, все ряды из элементов матрицы сходятся абсолютно.
+            А значит, экпоненциал существует.
+        \item \begin{gather*}
+                AB = BA \\
+                (A + B)^2 = A^2 + 2AB + B^2 \\
+                (A + B)^3 = A^3 + 3A^2B + 3AB^2 + B^3 \\
+                (A + B)^m = \sum\limits_{k + l = m} \frac{m!}{k! l!} A^k B^l
+            \end{gather*}
+            Значит,
+            \begin{gather*}
+                e^A = \sum\limits_{k = 0}^{\infty} \frac{A^k}{k!}, \;
+                e^B = \sum\limits_{l = 0}^{\infty} \frac{B^l}{l!} \\
+                e^A \cdot e^B = \left( \sum\limits_{k = 0}^{\infty} \frac{A^k}{k!} \right) \left( \sum\limits_{l = 0}^{\infty} \frac{B^l}{l!} \right) =
+                \sum\limits_{k = 0, l = 0}^{\infty} \frac{A^k B^l}{k! l!} = \\
+                \sum\limits_{m = 0}^\infty \frac{1}{m!} \sum\limits_{k + l = m} \frac{m!}{k! l!} A^k B^l = 
+                \sum\limits_{m = 0}^\infty \frac{1}{m!} (A + B)^m = 
+                e^{AB}
+            \end{gather*}
+        \item Заметим, что $D$ и $-D$ коммутируют.
+            \begin{gather*}
+                e^{D + (-D)} = e^{O} = I = e^D \cdot e^{-D} \\
+                (e^D)^{-1} = e^{-D}
+            \end{gather*}
+        \item Распишем по определению:
+            \begin{gather*}
+                e^{tA} = \sum\limits_{k = 0}^{\infty} \frac{t^k}{k!} A^k
+            \end{gather*}
+            Это абсолютно сходящийся степенной ряд.
+            Его можно почленно дифференцировать, и радиус сходимости не изменится.
+            Получим
+            \begin{gather*}
+                \frac{d}{dt} e^{tA} = 
+                \frac{d}{dt} ( I + tA + \frac{t^2}{2!} A + \ldots ) =
+                O + A + tA^2 + \ldots = \\
+                A(I + tA + \frac{t^2}{2!}A^2 + \ldots) = 
+                A \cdot e^{tA} = 
+                e^{tA} \cdot A.
+            \end{gather*}
+    \end{enumerate}
+\end{proof}
+
+\begin{exmp}
+    \begin{gather*}
+        A = \left( \begin{matrix}
+            0 & 0 \\
+            0 & 0
+        \end{matrix} \right), \quad 
+        e^{tA} = I + t \cdot O + \ldots = I
+    \end{gather*}
+\end{exmp}
+
+\begin{exmp}
+    \begin{gather*}
+        A = \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0
+        \end{matrix} \right),
+        A^2 = \left( \begin{matrix}
+            0 & 0 \\
+            0 & 0
+        \end{matrix} \right) = A^3 = \ldots, \\
+        e^{tA} = I + t \cdot A + \frac{t^2}{2!} A^2 + \ldots  =
+        \left( \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix} \right) + t \cdot \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0
+        \end{matrix} \right) = 
+        \left( \begin{matrix}
+            1 & t \\
+            0 & 1
+        \end{matrix} \right)
+    \end{gather*}
+\end{exmp}
+
+\begin{exmp}
+    \begin{gather*}
+        A = \left( \begin{matrix}
+            0 & 1 \\
+            -1 & 0
+        \end{matrix} \right), \quad
+        A^2 = \left( \begin{matrix}
+            -1 & 0 \\
+            0 & -1
+        \end{matrix} \right) = -I, \\
+        A^3 = \left( \begin{matrix}
+            0 & -1 \\
+            1 & 0
+        \end{matrix} \right), \quad
+        A^4 = \left( \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix} \right) = I.
+    \end{gather*}
+
+    \begin{gather*}
+        e^{tA} = I + tA + \frac{t^2}{2!} A^2 + \frac{t^3}{3!} A^3 + \frac{t^4}{4!} A^4 + \ldots = \left( \begin{matrix}
+            e_{11} & e_{12} \\
+            e_{21} & e_{22}
+        \end{matrix} \right) \\
+        e_{11} = 1 - \frac{t^2}{2!} + \frac{t^4}{4!} - \ldots = \cos t \\
+        e_{12} = t - \frac{t^3}{3!} + \frac{t^5}{5!} - \ldots = \sin t \\
+        e_{21} = -t + \frac{t^3}{3!} - \frac{t^5}{5!} + \ldots = -\sin t \\
+        e_{22} = 1 - \frac{t^2}{2!} + \frac{t^4}{4!} - \ldots = \cos t \\
+    \end{gather*}
+\end{exmp}

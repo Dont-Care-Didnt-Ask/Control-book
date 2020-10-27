@@ -1,0 +1,427 @@
+\section{Лекция 9}
+
+На прошлой лекции было введено определение экспоненциала матрицы:
+\begin{equation*}
+    e^{A} = I + A + \frac{A^2}{2!} + \ldots + \frac{A^n}{n!} + \ldots
+\end{equation*}
+
+Напомним его свойства:
+\begin{enumerate}
+    \item $A B = B A \implies e^{A + B} = e^{A} e^{B}$
+    \item $\left( e^{A} \right)^{-1} = e^{-A}$
+    \item $ \frac{d}{dt} e^{tA} = A \cdot e^{tA} = e^{tA} \cdot A$
+\end{enumerate}
+
+%Его можно использовать для решения матричной задачи Коши:
+Матричный экспоненциал является решением задачи Коши:
+\begin{gather*}
+    \begin{cases}
+        \dot{X} = A X \\
+        X(0) = I
+    \end{cases}
+    \implies X(t) = e^{tA}
+\end{gather*}
+
+Например, для $ A = \left( \begin{matrix}
+    0 & 1 \\
+    0 & 0
+\end{matrix} \right)$ получится $e^{tA} = \left( \begin{matrix}
+    1 & t \\
+    0 & 1
+\end{matrix} \right)$; \\
+для $ A = \left( \begin{matrix}
+    0 & 1 \\
+    -1 & 0
+\end{matrix} \right)$ получится $e^{tA} = \left( \begin{matrix}
+    \cos t & \sin t \\
+    -\sin t & \cos t
+\end{matrix} \right)$.
+
+Можно рассматривать матрицу по столбцам:
+\begin{gather*}
+    \frac{d}{dt} e^{tA} = A e^{tA} 
+    \Bigl[ \dot{e_1}  \ldots  \dot{e_n} \Bigr] = A \Bigl[ e_1 \ldots e_n \Bigr]
+\end{gather*}
+
+Получим $n$ задач Коши с соответствующими начальными условиями:
+\begin{equation*}
+    \begin{cases}
+        \dot{e} = A e \\
+        e(0) = \vec{e_i},
+    \end{cases}
+\end{equation*}
+где $\vec{e_i} = (0, \ldots, 0, \underbrace{1}_{i-\text{й}}, 0, \ldots, 0)^T$.
+
+\begin{exmp}
+    Пусть $A = \left( \begin{matrix}
+        0 & 1 \\
+        0 & 0
+    \end{matrix} \right).$
+
+    Решим задачи Коши
+    \begin{equation*}
+        \dot{x} = Ax, \; x(0) = \vec{e_i}, i = 1, 2.
+    \end{equation*}
+
+    При $x(0) = e_1$:
+    \begin{equation*}
+        \begin{cases}
+            \dot{x_1} = x_2, & x_1(0) = 1 \\
+            \dot{x_2} = 0, & x_2(0) = 0 
+        \end{cases} \implies
+    \end{equation*}
+    \begin{align*}
+        \dot{x_2} = 0 &\implies x_2(t) = C_2 \\
+        \dot{x_1} = C_2 &\implies x_1(t) = C_2 t + C_1 \\
+        x_2(0) = 0 &\implies C_2 = 0 \\
+        x_1(0) = 1 &\implies C_1 = 1
+    \end{align*}
+
+    Значит, решение первой задачи~---
+    $x(t) = \left( \begin{matrix}
+        1 \\
+        0
+    \end{matrix} \right)$.
+
+    При $x(0) = e_2$:
+    \begin{equation*}
+        \begin{cases}
+            \dot{x_1} = x_2 & x_1(0) = 0 \\
+            \dot{x_2} = 0 & x_2(0) = 1
+        \end{cases} \implies 
+    \end{equation*}
+        
+    \begin{align*}
+        \dot{x_2} &\implies x_2(t) = C_2 \\
+        \dot{x_1} = C_2 &\implies x_1(t) = C_2 t + C_1 \\
+        x_2(0) = 1 &\implies C_2 = 1 \\
+        x_1(0) = 0 &\implies C_1 = 0
+    \end{align*}
+
+    Значит, решение второй задачи~---
+    $x(t) = \left( \begin{matrix}
+        t \\
+        1
+    \end{matrix} \right)$.
+    Итого $e^{tA} = \left( \begin{matrix}
+        1 & t \\
+        0 & 1
+    \end{matrix} \right)$.
+\end{exmp}
+
+\begin{exmp}
+    Пусть 
+    $A = \left( \begin{matrix}
+        0 & 1 \\
+        0 & -1
+    \end{matrix} \right)$.
+    Найдём её экспоненциал.
+
+    \begin{gather*}
+        \dot{x} = Ax, \; x(0) = \vec{e_i}, i = 1, 2 \\
+        \begin{cases}
+            \dot{x_1} = x_2 \\
+            \dot{x_2} = -x_2
+        \end{cases}
+    \end{gather*}
+    \begin{align*}
+        \dot{x_2} = -x_2 &\implies x_2(t) = C_2 e^{-t} \\
+        \dot{x_1} = C_2 e^{-t} &\implies x_1(t) = C_1 - C_2 e^{-t}\\
+    \end{align*}
+    Учтём начальные условия:
+    \begin{align*}
+        \begin{cases}
+            x_1(0) = 1 \\
+            x_2(0) = 0 
+        \end{cases} \implies
+        \begin{cases}
+            C_1 = 1 \\
+            C_2 = 0 
+        \end{cases} \\
+        \begin{cases}
+            x_1(0) = 0 \\
+            x_2(0) = 1
+        \end{cases} \implies
+        \begin{cases}
+            C_1 = 1 \\
+            C_2 = 1
+        \end{cases}
+    \end{align*}
+
+    Значит, $e^{tA} = \left( \begin{matrix}
+        1 & 1-e^{-t} \\
+        0 & e^{-t}
+    \end{matrix} \right)$.
+\end{exmp}
+
+\begin{exmp}
+    Пусть $A = \left( \begin{matrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{matrix} \right)$. Тогда
+    \begin{equation*}
+        e^{tA} = I + tA + \frac{t^2}{2!} A^2 = \left( \begin{matrix}
+            1 & t & \frac{t^2}{2} \\
+            0 & 1 & t \\
+            0 & 0 & 1
+        \end{matrix} \right)
+    \end{equation*}
+\end{exmp}
+%Аналогично выглядит экспоненциал $n$-мерной матрицы такой же структуры.
+
+Легко доказываются следующие свойства:
+\begin{itemize}
+    \item $\left( e^{tA} \right)^* = e^{tA^*}$
+    \item $e^{tA} \cdot e^{sA} = e^{(t + s)A}$
+\end{itemize}
+
+Ещё раз напомним формулу для решения задачи Коши:
+\begin{gather*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) = x_0
+    \end{cases} \implies \\
+\end{gather*}
+\begin{multline} \label{lection9:cauchy_formula}
+    x(t) = e^{(t - t_0)A} \left( x_0 + \int\limits_{t_0}^{t_1} e^{-(s - t_0)A} u(s)\, ds \right) =
+    e^{(t - t_0)A}x_0 + \int\limits_{t_0}^{t_1} e^{(t - s)A} u(s) \, ds.
+\end{multline}
+
+\begin{namedthm}[Теорема Каратеодори]
+    Пусть $u(t)$~--- интегрируемая по Лебегу на отрезке $[t_0, t_1]$ функция.
+
+    Тогда решение задачи Коши существует, единственно, принадлежит классу абсолютно непрерывных функций и задаётся формулой Коши \ref{lection9:cauchy_formula}.
+\end{namedthm}
+
+\begin{proof}
+    Проверим начальное условие:
+    \begin{equation*}
+        x(t_0) = e^{(t_0 - t_0)A}x_0 + \int\limits_{t_0}^{t_0} e^{-(s - t_0)A} ds = I \cdot x_0 = x_0
+    \end{equation*}
+
+    Посчитаем производную:
+    \begin{multline*}
+        \dot{x} = \frac{d}{dt} \left( e^{(t - t_0)A} \cdot x_0 + e^{tA} \int\limits_{t_0}^{t} e^{-sA} \cdot u(s) ds \right) = \\
+        \frac{d}{dt} \left( e^{(t - t_0)A} \cdot x_0 \right) + 
+        \frac{d}{dt} \left( e^{tA} \right) \cdot \int\limits_{t_0}^{t} e^{-sA} u(s) ds + 
+        e^{tA} \cdot \frac{d}{dt} \left( \int\limits_{t_0}^{t} e^{-sA} u(s) ds \right) = \\
+        Ae^{(t - t_0)A} \cdot x_0 + Ae^{tA} \cdot \int\limits_{t_0}^{t} e^{-sA} u(s) ds + e^{tA} \cdot e^{-tA} \cdot u(t) = \\
+        A \left( e^{(t-t_0)A} \cdot x_0 + \int\limits_{t_0}^{t} e^{(t - s)A} u(s) ds \right) + u(t) = Ax(t) + u(t).
+    \end{multline*}
+    Существование доказано.
+
+    Докажем единственность.
+    Предположим противное: пусть $x(t), y(t)$~--- 2 различных решения ЗК в классе абсолютно непрерывных функций.
+    Рассмотрим $z(t) = x(t) - y(t)$.
+    \begin{equation*}
+        \begin{cases}
+            \dot{z} = Ax + u - Ay - u = A(x - y) \\
+            z(t_0) = x(t_0) - y(t_0) = 0
+        \end{cases}
+    \end{equation*}
+    То есть, достаточно показать, что у задачи
+    \begin{equation*}
+        \begin{cases}
+            \dot{z} = Az \\
+            z(t_0) = 0
+        \end{cases}
+    \end{equation*}
+    есть единственное решение~--- $z(t) \equiv 0$.
+
+    Оценим производную:
+    \begin{equation*}
+        \frac{d}{dt} \Norm{z(t)}^2 = \frac{d}{dt} (z(t), z(t)) = 
+        2(\dot{z}, z) = 2(Az, z) \leqslant 2 \Norm{A} \cdot \Norm{z(t)}^2
+    \end{equation*}
+    Ввёдем функцию $\varphi(t) = \Norm{z(t)}^2 \cdot e^{- 2 \Norm{A} (t - t_0)}$.
+    Тогда
+    \begin{equation*}
+        \begin{cases}
+            \varphi(0) = 0 \\
+            \varphi(t) \geqslant 0 \quad \forall t \geqslant t_0
+        \end{cases}
+    \end{equation*}
+
+    Оценим её производную:
+    \begin{multline*}
+        \dot{\varphi}(t) = \frac{d}{dt} \left( \Norm{z(t)}^2 \right) \cdot e^{-2 \Norm{A}(t - t_0)} - \Norm{z(t)}^2 \cdot 2 \Norm{A} e^{- 2 \Norm{A}(t - t_0)} \leqslant \\
+        2 \Norm{A} \cdot \Norm{z(t)}^2 \cdot e^{-2 \Norm{A}(t - t_0)} - 2 \Norm{A} \cdot \Norm{z(t)}^2 \cdot e^{-2 \Norm{A}(t - t_0)} = 0.
+    \end{multline*}
+
+    Таким образом, $\dot{\varphi}(t) \leqslant 0$, а в силу абсолютной непрерывности $ \varphi(t) = \varphi(t_0) + \int\limits_{t_0}^{t_1} \dot{\varphi(s)} \, ds \leqslant 0$.
+    Но по определению $\varphi(t) \geqslant 0 \implies \varphi(t) \equiv 0$.
+\end{proof}
+
+Сформулируем ещё одно свойство экспоненциала:
+\begin{namedthm}[О представлении экспоненциала в виде суммы первых $n$ степеней матрицы $A$]
+    Пусть $A \in \mathbb{R}^{n \times n}$.
+    Тогда
+    \begin{equation*}
+        e^{tA} = \sum\limits_{j = 0}^{n - 1} p_j(t) A^j,
+    \end{equation*}
+    где $p_j(t)$~--- аналитические функции, т.\,е. функции, всюду разложимые в степенной ряд с радиусом сходимости $R = \infty$.
+\end{namedthm}
+
+Для доказательства нам потребуется следующая теорема.
+\begin{namedthm}[Теорема Гамильтона"--~Кэли]
+    Определим характерический многочлен матрицы $A$:
+    \begin{equation*}
+        \left| \begin{matrix}
+            a_{11} - \lambda & a_{12} & \ldots & a_{1n} \\
+            a_{21} & a_{22} - \lambda & \ldots & a_{2n} \\
+            \ldots & \ldots & \ldots & \ldots \\
+            a_{n1} & a_{n2} & \ldots & a_{nn} - \lambda \\
+        \end{matrix} \right| = 
+        (-1)^n \bigl(\lambda^n - h_{n-1} \lambda^{n-1} - \ldots - h_1 \lambda - h_0\bigr) \equiv f(\lambda).
+    \end{equation*}
+    Тогда $f(A) = O.$
+\end{namedthm}
+
+Таким образом,
+\begin{equation*}
+    A^n = h_{n-1} A^{n-1} + h_{n-2}A^{n-2} + \ldots + h_1 A + h_0 I,
+\end{equation*}
+или
+\begin{equation*}
+    A^n = q^0_{n-1} A^{n-1} + q^0_{n-2}A^{n-2} + \ldots + q^0_1 A + q^0_0 I.
+\end{equation*}
+Значит, и любая степень выше $n$-й выражается через первые $n$:
+\begin{gather*}
+    A^{n+1} = q^0_{n-1} A^{n} + q^0_{n-2}A^{n-1} + \ldots + q^0_1 A^2 + q^0_0 A \\
+    A^{n+1} = q^0_{n-1} \underbrace{\left( q^0_{n-1} A^{n-1} + q^0_{n-2}A^{n-2} + \ldots + q^0_1 A + q^0_0 I \right)}_{A^n}
+    + q^0_{n-2}A^{n-1} + \ldots + q^0_1 A^2 + q^0_0 A \\
+    A^{n+1} = q^1_{n-1} A^{n-1} + q^1_{n-2}A^{n-2} + \ldots + q^1_1 A + q^1_0 I
+\end{gather*}
+Для более высоких степеней аналогично.
+
+Далее можно подставить эти выражения в определение экспоненциала, привести подобные и показать, что получающиеся ряды сходятся.
+
+\begin{exmp}
+    \begin{equation*}
+        A = \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0
+        \end{matrix} \right)
+    \end{equation*}
+    \begin{gather*}
+        e^{tA} = \left( \begin{matrix}
+            1 & t \\
+            0 & 1
+        \end{matrix} \right) = 
+        p_0(t) I + p_1(t) A =
+        1 \cdot I + t \cdot A.
+    \end{gather*}
+
+    Как находить такие функции?
+    %\begin{gather*}
+    %    e^{tA} = p_0(t) \cdot I + p_1(t) \cdot A \quad \biggl| \; \frac{d}{dt}\\
+    %    A e^{tA} = \dot{p_0} \cdot I + \dot{p_1} \cdot A \\
+    %    A \bigl(p_0 \cdot I + p_1 \cdot A \bigr) = \dot{p_0} I + \dot{p_1} A \\
+    %    A \cdot p_0 + A^2 \cdot p_1 = A \cdot p_0(t) = \dot{p_0} \cdot I + \dot{p_1} \cdot A
+    %\end{gather*}
+    \begin{gather*}
+        e^{tA} = p_0 I + p_1 A \quad \biggl| \; \frac{d}{dt}\\
+        A e^{tA} = \dot{p_0} I + \dot{p_1}  A \\
+        A \bigl(p_0 I + p_1 A \bigr) = \dot{p_0} I + \dot{p_1} A \\
+        A p_0 + A^2 p_1 = A p_0 = \dot{p_0} I + \dot{p_1} A
+    \end{gather*}
+    Получаем уравнение
+    \begin{equation*}
+        p_0 \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0
+        \end{matrix} \right) = \dot{p_0} \left( \begin{matrix}
+            1 & 0 \\
+            0 & 1 
+        \end{matrix} \right) + \dot{p_1} \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0 
+        \end{matrix} \right)
+    \end{equation*}
+
+    Можем составить дифференциальное уравнение, беря начальное условие из тождества $p_0(0) I + p_1(t) A = I$:
+    \begin{gather*}
+        \dot{p_0} = 0, \; p_0(0) = 1  \implies p_0(t) \equiv 1 \\
+        \dot{p_1} = p_0, \; p_1(0) = 0 \implies p_1(t) \equiv t
+    \end{gather*}
+\end{exmp}
+
+Итого есть три способа поиска экспоненциала: по определению, решением линейной системы или поисеом функций $p_i(t)$.
+
+\begin{exmp}
+    \begin{equation*}
+        A = \left( \begin{matrix}
+            0 & 1 \\
+            0 & 0
+        \end{matrix} \right)
+    \end{equation*}
+
+    \begin{gather*}
+        \begin{cases}
+            \dot{x_1} = x_2 \\
+            \dot{x_2} = x_1 \\
+            x_0 = e_i, i = 1, 2
+        \end{cases}
+    \end{gather*}
+
+    \begin{equation*}
+        \ddot{x_1} = \dot{x_2} = x_1, \lambda^2 = 1 \implies \lambda = \pm 1
+    \end{equation*}
+    \begin{gather*}
+        x_1(t) = C_1 e^t + C_2 e^{-t} \\
+        x_1(t) = C_1 e^t - C_2 e^{-t}
+    \end{gather*}
+    При $x_0 = e_1$:
+    \begin{gather*}
+        \begin{cases}
+            x_1(0) = 1 = C_1 + C_2 \\
+            x_2(0) = 0 = C_1 + C_2 
+        \end{cases} \\
+        C_1 = \frac{1}{2} = C_2 \implies \\
+        x_1(t) = \frac{e^t + e^{-t}}{2} = \cosh t \\
+        x_2(t) = \frac{e^t - e^{-t}}{2} = \sinh t \\
+    \end{gather*}
+    При $x_0 = e_2$:
+    \begin{gather*}
+        \begin{cases}
+            x_1(0) = 0 = C_1 + C_2 \\
+            x_2(0) = 1 = C_1 + C_2 
+        \end{cases} \\
+        C_1 = \frac{1}{2},  C_2 = -\frac{1}{2} \implies \\
+        x_1(t) = \frac{e^t - e^{-t}}{2} = \sinh t \\
+        x_2(t) = \frac{e^t + e^{-t}}{2} = \cosh t \\
+    \end{gather*}
+    Итого
+    \begin{equation*}
+        e^{tA} = \left( \begin{matrix}
+            \cosh t & \sinh t \\
+            \sinh t & \cosh t
+        \end{matrix} \right) = 
+        \cosh t \cdot I + \sinh t \cdot A.
+    \end{equation*}
+    Соответственно, $p_0(t) = \cosh t, p_1(t) = \sinh t$.
+\end{exmp}
+
+Мы почти готовы решать задачу оптимального управления:
+\begin{equation*}
+    \dot{x} = Ax + u(t) \\
+    x(t_0) \in M_0 \\
+    x(t_1) \in M_1
+\end{equation*}
+
+Нужно ввести понятия \textit{множества достижимости} и \textit{множества управляемости}.
+
+\begin{rmrk}
+    Если в задаче Коши задать условие не в точке $t_0$, а в точке $t_1$, то по существу почти ничего не изменится:
+    \begin{equation*}
+        \begin{cases}
+            \dot{x} = Ax + u(t) \\
+            x(t_1) = x_1
+        \end{cases} \implies
+    \end{equation*}
+    \begin{multline*}
+        x(t) = e^{(t - t_1)A} \left( x_1 + \int\limits_{t_1}^{t} e^{(t_1 - s)A} u(s)\, ds \right) = 
+        e^{(t - t_1)A}x_1 + \int\limits_{t_1}^{t} e^{(t - s)A} u(s)\, ds.
+    \end{multline*}
+\end{rmrk}
