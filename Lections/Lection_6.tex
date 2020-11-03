@@ -224,7 +224,7 @@
 
 \begin{thm*}
     \begin{multline*}
-        F(t) \text{непр. м. о.} \implies \\
+        F(t) \text{~--- непрерывное многозначное отображение} \implies \\
         C(F(t), \psi) \text{непрерывно по } t \text{ равномерно по } \psi \in S \implies \\
         \operatorname{conv} F(t) \text{ непрерывна.}
     \end{multline*}
@@ -247,7 +247,7 @@
     $F(t)\colon E^1 \mapsto \operatorname{conv}\Omega(E^n)$.
     Тогда 
     \begin{multline*}
-        F(t) \text{непр. м. о.} \iff \\
+        F(t) \text{~--- непрерывное многозначное отображение} \iff \\
         C(F(t), \psi) \text{непрерывно по } t \text{ равномерно по } \psi \in S \iff \\
         \operatorname{conv} F(t) \text{ непрерывна по } t \text{ равномерно по } \psi \in S \iff \\
         \operatorname{conv} F(t) \text{ непрерывна по } t \text{ по } \forall \text{ фиксированного }\psi \in S
@@ -264,12 +264,14 @@
         \end{align} 
 
         Считаем, что $\psi_k$ сходится, так как это последовательность на компакте, и из неё можно выделить сходящуюся подпоследовательность.
-        \begin{align*}
+        
+        \begin{multline*}
             |C(F(t_k), \psi_k) - C(F(t_0), \psi_k) + C(F(t_k), \psi_0) - C(F(t_0), \psi_0) + \\
-            C(F(t_0), \psi_0) - C(F(t_0), \psi_k)| \leqslant \\
-            |F(t_k)| \Norm{\psi_k - \psi_0} + |C(F(t_k), \psi_0) - C(F(t_0), \psi_0)|  \\ + 
-            |F(t_0)| \Norm{\psi_k - \psi_0}
-        \end{align*}
+            C(F(t_0), \psi_0) - C(F(t_0), \psi_k)| \leqslant
+        \end{multline*}
+        \begin{equation*}
+            |F(t_k)| \Norm{\psi_k - \psi_0} + |C(F(t_k), \psi_0) - C(F(t_0), \psi_0)| + |F(t_0)| \Norm{\psi_k - \psi_0}
+        \end{equation*}
         Всё три слагаемых стремятся к нулю.
 
         Допустим теперь, что $|F(t_k)| \xrightarrow[k \to \infty]{} +\infty$.
@@ -280,14 +282,15 @@
         \end{equation*}
         где $\phi_k$~--- вектора, на которых достигается максимум.
         $\phi_k \in S \implies \phi_k \to \phi_0 \in S$.
-        (На самом деле, сходится некоторая подпоследовательность, но мы просто переобозначим её за $\phi_k$)
+        (На самом деле, сходится некоторая подпоследовательность, но мы просто переобозначим её за $\phi_k$).
 
         \begin{align*}
-            C(F(t_k), \phi_k) - C(F(t_0), \phi_0) \leqslant |F(t_0)| \cdot \Norm{\phi_k - \phi_0} \\
-            |F(t_k)| - C(F(t_0), \phi_0) \leqslant |F(t_0)| \cdot \Norm{\phi_k - \phi_0} \\
-            |F(t_k)|\left( 1 - \Norm{\phi_k - \phi_0}  \right) \leqslant C(F(t_0), \phi_0)  
+            C(F(t_k), \phi_k) - C(F(t_0), \phi_0) \leqslant |F(t_k)| \cdot \Norm{\phi_k - \phi_0} \\
+            |F(t_k)| - C(F(t_0), \phi_0) \leqslant |F(t_k)| \cdot \Norm{\phi_k - \phi_0} \\
+            |F(t_k)|\left( 1 - \Norm{\phi_k - \phi_0}  \right) \leqslant C(F(t_k), \phi_0)  
         \end{align*}
-        То есть $|F(t_k)|$ ограничена, и это противоречит нашему предположению.
+        Функция $C(F(t), \psi_0)$ непрерывна по $t$, а значит, ограничена.
+        Но из этого вытекает ограниченность $|F(t_k)|$, и это противоречит нашему предположению.
     \end{itemize}
 \end{proof}
 

@@ -1,0 +1,211 @@
+\section{Лекция 10}
+
+Рассматриваем краевую задачу.
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) \in M_0 \\
+        x(t_1) \in M_1
+    \end{cases}
+\end{equation*}
+
+\subsection{Множество достижимости}
+%Зафиксируем сначала только начальное условие.
+Оставим сначала только условие в начальный момент времени.
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) \in M_0
+    \end{cases}
+\end{equation*}
+\begin{defn}
+    Пусть $t \in [t_0, t_1]$.
+    Множество достижимости $X(t) = X(t, M_0, U, t_0)$ определяется как
+    \begin{gather*}
+        X(t) = \Set{x \in E^n\colon x = x(t), \frac{dx}{ds} = Ax(s) + u(s), t_0 \leqslant s \leqslant t_1, x(t_0) \in M_0, u \in D_U} = \\
+        \Set{x \in E^n\colon x = e^{(t - t_0)A} x_0 + \int\limits_{t_0}^{t_1} e^{(t - s)A} u(s) \, ds, \; x_0 \in M_0, u \in D_U} = \\
+        \bigcup_{\substack{ x_0 \in M_0 \\ u \in D_U}} \Set{e^{(t - t_0)A} x_0 + \int\limits_{t_0}^{t_1} e^{(t - s)A} u(s) \,ds}
+    \end{gather*}
+\end{defn}
+
+Свойства множества достижимости:
+\begin{enumerate}
+    \item $X(t) = e^{(t - t_0)A} M_0 + \displaystyle \int\limits_{t_0}^{t} e^{(t - s)A}  U \, ds, \; X(t_0) = M_0$
+    \item $M_0, U \in \Omega(E^n) \implies X(t) \in \Omega(E^n), t \in [t_0, t_1]$
+    \item $M_0 \in \operatorname{conv}\Omega(E^n), U \in \Omega(E^n) \implies X(t) \in \operatorname{conv} \Omega(E^n)$
+    \item $C(X(t), \psi) = C(M_0, e^{(t - t_0)A^*} \psi) + \displaystyle \int\limits_{t_0}^{t} C(U, e^{(t - s)A^*}\psi) ds$
+    \item $\tau = t - t_0 \implies X(t) = e^{\tau A} M_0 + \displaystyle \int\limits_{0}^{\tau} e^{\alpha A} U d\alpha$
+    \item $X(t)$ непрерывно зависит от $t$ на $[t_0, t_1]$.
+\end{enumerate}
+
+Все утверждения достаточно просты.
+Докажем только 5-е.
+
+\begin{proof}
+    Пусть $G = \displaystyle \int\limits_{t_0}^{t} e^{(t - s)A} U ds$.
+    Сделаем замену $t - s = \alpha, d\alpha = -ds$.
+    \begin{gather*}
+        C(G, \psi) = \int\limits_{t_0}^{t} C(U, e^{(t - s)A^*} \psi) ds =
+        \int\limits_{t - t_0}^{0} C(U, e^{(t - s)A^*} \psi) d(-\alpha) = \\
+        \int\limits_{0}^{t - t_0} C(U, e^{(t - s)A^*} \psi) d(\alpha) = 
+        G_1 = \int\limits_{0}^{\tau} e^{\alpha A} U d\alpha \implies 
+    \end{gather*}
+    Очевидно, $e^{(t - t_0)A} = e^{\tau A}$.
+    Отсюда и вытекает утверждаемое.
+\end{proof}
+
+\subsection{Множество управляемости}
+Теперь зафиксируем условие в конечный момент времени.
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_1) \in M_1
+    \end{cases}
+\end{equation*}
+
+\begin{defn}
+    Пусть $t \in (t_0, t_1)$.
+    Множество управляемости $Z(t) = Z(t, M_1, U)$ определяется как
+    \begin{equation*}
+        Z(t) = \Set{x \in E^n\colon \frac{dx}{ds} = Ax(s) + u(s), t \leqslant s \leqslant t_1, x(t_1) \in M_1, u \in D_U} =
+    \end{equation*}
+    \begin{multline*}
+        \Set{x \in E^n \colon x = e^{(t - t_1)A} x_1 + \int\limits_{t_1}^{t} e^{(t - s)A} u(s) ds = \\
+        e^{(t - t_1)A} x_1 + \int\limits_{t}^{t_1} e^{(t - s)A} (-u(s)) ds, \; x_1 \in M_1, \; u \in D_U} =
+    \end{multline*}
+    \begin{equation*}
+        \bigcup_{\substack{x_1 \in M_1 \\ u \in D_U}} \Set{e^{(t - t_1)A} x_1 + \int\limits_{t}^{t_1} e^{(t - s)A} (-u(s)) ds}.
+    \end{equation*}
+\end{defn}
+
+Свойства множества управляемости:
+\begin{enumerate}
+    \item $Z(t) = e^{(t - t_1)A} M_1 + \displaystyle \int\limits_{t}^{t_1} e^{(t - s)A}(-U) ds, \; X(t_1) = M_1$
+    \item $M_1, U \in \Omega(E^n) \implies Z(t) \in \Omega(E^n), t \in [t_0, t_1]$
+    \item $M_1 \in \operatorname{conv}\Omega(E^n), U \in \Omega(E^n) \implies Z(t) \in \operatorname{conv} \Omega(E^n)$
+    \item $C(Z(t), \psi) = C(M_1, e^{(t - t_1)A^*}, \psi) + \displaystyle \int\limits_{t}^{t_1} C(U, -e^{(t - s)A^*}\psi) ds$
+    \item $\tau = t - t_1 \implies Z(t) = e^{-\tau A} M_1 + \displaystyle \int\limits_{0}^{\tau} e^{-\alpha A} (-U) d\alpha$
+    \item $Z(t)$ непрерывно зависит от $t$ на $[t_0, t_1]$.
+\end{enumerate}
+
+\begin{exmp}
+    $A = \left( \begin{matrix}
+        0 & 0 \\
+        0 & 0
+    \end{matrix} \right), \; \dot{x} = u.$
+    Положим $\tau = t - t_0$.
+    \begin{equation*}
+        X(\tau) = M_0 + \int\limits_{0}^{\tau} U d\alpha = M_0 + \tau \cdot \operatorname{conv} U
+    \end{equation*}
+    Пусть теперь $\tau = t_1 - t$
+    \begin{equation*}
+        Z(\tau) = M_1 + \int\limits_{0}^{\tau} -U d\alpha = M_1 + \tau \operatorname{conv} (-U)
+    \end{equation*}
+    Пусть $U = \left\{ \left( \begin{matrix}
+        1 \\ 1
+    \end{matrix} \right), 
+    \left( \begin{matrix}
+        1 \\ -1
+    \end{matrix} \right) \right\}$.
+
+    \begin{gather*}
+        \operatorname{conv} U = \Set{x \in E^2\colon x_1 = 1, |x_2| \leqslant 1}, \\
+        \operatorname{conv} -U = \Set{x \in E^2\colon x_1 = -1,  |x_2| \leqslant 1}
+    \end{gather*}
+
+    %Если $M_0 = \left\{ \left( \begin{matrix}
+    %    0 \\ 0
+    %\end{matrix} \right)\right\} $, то множество достижимости - это множество тех точек, из которых можно попасть в начало координат за время $\tau$.
+\end{exmp}
+
+\subsection{Сопряжённое уравнение}
+Пусть есть уравнение $\dot{x} = Ax + u$.
+Рассмотрим \textit{сопряжённое уравнение} $\dot{\psi} = -A^* \psi$.
+Очевидно, что оно всегда имеет решение $\psi \equiv 0$.
+Но нас будут интересовать нетривиальные решения.
+По формуле Коши
+\begin{equation*}
+    \psi(t) = e^{-(t - t_0)A^*} \psi(t_0)
+\end{equation*}
+При этом
+\begin{equation*}
+    \psi(t) \neq 0 \iff \psi(t_0) \neq 0
+\end{equation*}
+
+\begin{defn}
+    Любое ненулевое решение сопряжённого уравнения называется сопряжённой переменной:
+\end{defn}
+
+Если начальное условие задано в момент времени $t_1$, то решение будет иметь вид
+\begin{equation*}
+    \psi(t) = e^{-(t - t_0)A^*} \psi(t_1), \psi(t_1).
+\end{equation*}
+
+\begin{lem}
+    Докажем третье свойство.
+    Пусть $\dot{x} = Ax + u, t \in [t_0, t_1]$, $\psi(t)$~--- сопряжённая переменная.
+    \begin{enumerate}
+        \item $C(X(t), \psi(t)) = C(M_0, \psi(t_0)) + \int\limits_{t_0}^t C(U, \psi(s)) ds$
+        \item $C(Z(t), -\psi(t)) = C(M_1, -\psi(t_1)) + \int\limits_{t}^{t_1} C(U, \psi(s)) ds$
+        \item $\bigl( x(t), \psi(t) \bigr) = (x(t_0), \psi(t_0)) + \int\limits_{t_0}^{t} (u(s), \psi(s)) ds$
+        \item $\bigl( x(t), \psi(t) \bigr) = (x(t_1), -\psi(t_1)) + \int\limits_{t}^{t_1} (u(s), \psi(s)) ds$
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    Пусть $x(t) = e^{(t - t_0)A} x(t_0) + \int\limits_{t_0}^{t} e^{(t-s)A} ds$.
+    \begin{gather*}
+        \psi(t) = e^{-(t - t_0)A^*} \psi(t_0) \\
+        (x(t), \psi(t)) = \left( e^{(t - t_0)A} \left(x(t_0) + \int\limits_{t_0}^{t} e^{-(s-t_0)A}u(s) ds \right), e^{-(t - t_0)A^*} \psi(t_0) \right)\\
+        (x(t), \psi(t)) = \left( x(t_0) + \int\limits_{t_0}^{t} e^{-(s-t_0)A} u(s) ds, \; e^{(t - t_0)A^*} e^{-(t - t_0)A^*} \psi(t_0) \right)\\
+        (x(t), \psi(t)) = \left( x(t_0) + \int\limits_{t_0}^{t} e^{-(s-t_0)A} u(s) ds, \; \psi(t_0) \right) = \\
+        \bigl(x(t_0), \psi(t_0)\bigr) + \int\limits_{t_0}^{t} \Bigl(e^{-(s - t_0)A^*}u(s), \psi(t_0)\Bigr) ds = \\
+        \bigl(x(t_0), \psi(t_0)\bigr) + \int\limits_{t_0}^{t} \Bigl(u(s) e^{-(s - t_0)A^*}, \psi(t_0) \Bigr) ds = \\
+        \bigl(x(t_0), \psi(t_0)\bigr) + \int\limits_{t_0}^{t} \Bigl(u(s), e^{-(s - t_0)A} \psi(t_0) \Bigr) ds = \\
+        \bigl(x(t_0), \psi(t_0)\bigr) + \int\limits_{t_0}^{t} (u(s), \psi(s)) ds.
+    \end{gather*}
+
+    %Докажем четвёртое: $(x(t), - \psi(t)) = (x(t_1), -\psi(t_1)) + \int\limits_{t}^{t_1} (u(s), \psi(s)) ds $.
+    %\begin{gather*}
+    %    (x(t), -\psi(t)) = 
+    %    \left( e^{(t - t_1)A} \left( x(t_1) + \int\limits_{t_1}^{t} e^{-(s - t_1)A}u(s)ds, e^{-(t - t_1)A^*} \psi(t_1) \right) \right) = \\
+    %    \left( \left( x(t_1) + \int\limits_{t}^{t_1} e^{-(s - t_1)A}u(s)ds, \psi(t_1) \right) \right) = \\
+    %    (x(t_1), - \psi(t_1)) + \int\limits_{t}^{t_1} e^{-(s - t_1)A}u(s)ds, \psi(t_1) = \\
+    %    (x(t_1) - \psi(t_1)) + \ldots
+    %\end{gather*}
+    Четвёртое доказывается аналогично.
+    Первые два проверяются непостредственно подставкой формулы из определения сопряжённой переменной.
+\end{proof}
+
+\subsection{Управляемость}
+
+\begin{equation*}
+    \begin{cases}
+        \dot{x} = Ax + u(t) \\
+        x(t_0) \in M_0 \\
+        x(t_1) \in M_1
+    \end{cases}
+\end{equation*}
+
+\begin{defn}
+    Пусть $t \in [t_0, t_1]$.
+    Объект называется \textit{управляемым}, если
+    \begin{equation*}
+        \exists u \in D_U\colon x(t_0) \in M_0, x(t_1) \in M_1.
+    \end{equation*}
+\end{defn}
+
+Очевидно, что критерием управляемости является условие $X(t_1) \cap M_1 \neq \varnothing$.
+Используя опорные функции, можем получить необходимое условие управляемости:
+\begin{equation*}
+    C(X(t_1), \psi) + C(M_1, -\psi) \geqslant 0 \quad \forall \psi \in E^n, \psi \neq 0
+\end{equation*}
+Можно вопринимать $\psi$ как сопряжённую переменную:
+\begin{equation*}
+    C(X(t_1), \psi(t_1)) + C(M_1, -\psi(t_1)) \geqslant 0 \quad \forall \psi(t_1) \neq 0
+\end{equation*}
+
+Тогда можно сформулировать необходимое (и достаточное, в случае $M_0, M_1 \in \operatorname{conv}\Omega(E^n)$) условие управляемости с помощью сопряжённой переменной:
+\begin{equation*}
+    C(M_0, \psi(t_0)) + \int\limits_{t_0} C(U, \psi(s)) ds + C(M_1, -\psi(t_1)) \geqslant 0
+\end{equation*}
